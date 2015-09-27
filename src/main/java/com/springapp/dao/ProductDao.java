@@ -1,16 +1,16 @@
 package com.springapp.dao;
 
-import java.util.List;
-
+import com.springapp.model.Product;
+import com.springapp.model.ProductImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import com.springapp.model.ProductImpl;
+import java.util.List;
 
-public class ProductDao implements DaoInterface<ProductImpl, String> {
+public class ProductDao implements DaoInterface<Product, String> {
 
 	private Session currentSession;
 	
@@ -63,38 +63,38 @@ public class ProductDao implements DaoInterface<ProductImpl, String> {
 		this.currentTransaction = currentTransaction;
 	}
 
-	public void persist(ProductImpl entity) {
+	public void persist(Product entity) {
 		getCurrentSession().save(entity);
 	}
 
-	public void update(ProductImpl entity) {
+	public void update(Product entity) {
 		getCurrentSession().update(entity);
 	}
 
-	public ProductImpl findById(int id) {
-		ProductImpl product = (ProductImpl) getCurrentSession().get(ProductImpl.class, id);
+	public Product findById(int id) {
+		Product product = (ProductImpl) getCurrentSession().get(ProductImpl.class, id);
 		return product; 
 	}
 
 	//TODO
-	public ProductImpl findById(String id) {
+	public Product findById(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void delete(ProductImpl entity) {
+	public void delete(Product entity) {
 		getCurrentSession().delete(entity);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ProductImpl> findAll() {
-		List<ProductImpl> products = (List<ProductImpl>) getCurrentSession().createQuery("from Products").list();
+	public List<Product> findAll() {
+		List<Product> products = (List<Product>) getCurrentSession().createQuery("from Products").list();
 		return products;
 	}
 
 	public void deleteAll() {
-		List<ProductImpl> entityList = findAll();
-		for (ProductImpl entity : entityList) {
+		List<Product> entityList = findAll();
+		for (Product entity : entityList) {
 			delete(entity);
 		}
 	}

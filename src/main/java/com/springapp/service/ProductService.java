@@ -1,7 +1,7 @@
 package com.springapp.service;
 
 import com.springapp.dao.ProductDao;
-import com.springapp.model.ProductImpl;
+import com.springapp.model.Product;
 
 import java.util.List;
 
@@ -13,35 +13,35 @@ public class ProductService {
 		productDao = new ProductDao();
 	}
 
-	public void persist(ProductImpl entity) {
+	public void persist(Product entity) {
 		productDao.openCurrentSessionwithTransaction();
 		productDao.persist(entity);
 		productDao.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(ProductImpl entity) {
+	public void update(Product entity) {
 		productDao.openCurrentSessionwithTransaction();
 		productDao.update(entity);
 		productDao.closeCurrentSessionwithTransaction();
 	}
 
-	public ProductImpl findById(int id) {
+	public Product findById(int id) {
 		productDao.openCurrentSession();
-		ProductImpl product = productDao.findById(id);
+		Product product = productDao.findById(id);
 		productDao.closeCurrentSession();
 		return product;
 	}
 
 	public void delete(int id) {
 		productDao.openCurrentSessionwithTransaction();
-		ProductImpl product = productDao.findById(id);
+		Product product = productDao.findById(id);
 		productDao.delete(product);
 		productDao.closeCurrentSessionwithTransaction();
 	}
 
-	public List<ProductImpl> findAll() {
+	public List<Product> findAll() {
 		productDao.openCurrentSession();
-		List<ProductImpl> products = productDao.findAll();
+		List<Product> products = productDao.findAll();
 		productDao.closeCurrentSession();
 		return products;
 	}
@@ -50,6 +50,10 @@ public class ProductService {
 		productDao.openCurrentSessionwithTransaction();
 		productDao.deleteAll();
 		productDao.closeCurrentSessionwithTransaction();
+	}
+
+	public Product getProduct(String productCode){
+		return null;
 	}
 
 	public ProductDao productDao() {
