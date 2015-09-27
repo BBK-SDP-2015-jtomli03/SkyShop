@@ -23,7 +23,7 @@ public class ProductImpl implements Product {
 	private String description;
 	private BigDecimal price;
 	private String imageUrl;
-	private int stockLevel = 0;
+	private int stockLevel = -100;
 	private List<Supplier> suppliers = new ArrayList<Supplier>();
 	private boolean discontinued = false;
 	private Location location = null;
