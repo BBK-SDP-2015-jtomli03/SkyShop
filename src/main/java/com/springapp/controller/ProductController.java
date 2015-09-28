@@ -22,8 +22,7 @@ public class ProductController {
 
     @RequestMapping(path = "/add", method = RequestMethod.GET)
     public void addProduct() {
-        //check if product exists
-        String productCode = "";
+        String productCode = ""; //check if product exists using product code
         Product product = productService.getProduct(productCode);
         if(product == null){
             //initialise product -> if new product need way of obtaining product id
@@ -39,7 +38,7 @@ public class ProductController {
         List<Supplier> suppliers = new ArrayList<Supplier>();
         Product product = productService.findById(id);
         product.setSuppliers(suppliers);
-        productService.update(product);
+        productService.update(product); //persist product to DB
         //if all gone ok return ok status to client
     }
 
@@ -51,10 +50,12 @@ public class ProductController {
         if(product.isDiscontinued()){
             //return product discontinued
         }else if(product.getStockLevel() >= 0){
-            //check if product already on order
-            Order order = productOrderService.getOrder(product);
-            if
-            new ProductOrder(product, quantity);
+            Order order = productOrderService.getOrder(product); //check if product already on order
+            if(order == null){
+                new ProductOrder(product, quantity);
+            }else{
+                //return order info -> product already on order
+            }
         }else{
             //product is new and this is the first order, therefore add to the catalogue and place order
             ProductCatalogue.getCatalogue().addProduct(product);
