@@ -1,5 +1,7 @@
 package com.springapp.model;
 
+import org.joda.time.DateTime;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.Map;
 public class CustomerOrder implements Order {
     private static long orderNumberCounter = 0;
     private final long orderNumber = setOrderNumber();
+    private DateTime dateOrderPlaced;
     private Map<Product, Integer> productsOrdered;
     private Map<Product, Map<Date, Integer>> productsDispatched;
     private Map<Product, Map<Date, Integer>> productsDelivered;
@@ -18,6 +21,7 @@ public class CustomerOrder implements Order {
     private Customer customer;
 
     public CustomerOrder(Map<Product, Integer> productsOrdered, BigDecimal totalPrice, Customer customer) {
+        this.dateOrderPlaced  = new DateTime();;
         this.productsOrdered = productsOrdered;
         this.productsDispatched = null;
         this.productsDelivered = null;
@@ -25,6 +29,7 @@ public class CustomerOrder implements Order {
         this.customer = customer;
     }
 
+    //sets the order number and increments the orderNumberCounter
     private long setOrderNumber() {
         orderNumberCounter += 1;
         return orderNumberCounter;
@@ -65,28 +70,28 @@ public class CustomerOrder implements Order {
     }
 
     @Override
-    public Double getTotalPrice() {
-        return null;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
     @Override
-    public String getCustomer() {
-        return null;
+    public Customer getCustomer() {
+        return customer;
     }
 
     @Override
-    public Date getDateOrderPlaced() {
-        return null;
+    public DateTime getDateOrderPlaced() {
+        return dateOrderPlaced;
     }
 
     @Override
-    public void productDispatched(Product product, Integer quantity) {
+    public void setProductDispatched(Product product, Integer quantity) {
 
     }
 
     @Override
     public Map<Product, Map<Date, Integer>> getDispatchedProducts() {
-        return null;
+        return productsDispatched;
     }
 
     @Override
@@ -96,7 +101,7 @@ public class CustomerOrder implements Order {
 
     @Override
     public Map<Product, Map<Date, Integer>> getDeliveredProducts() {
-        return null;
+        return productsDelivered;
     }
 
     public static long getOrderNumberCounter(){
@@ -107,18 +112,6 @@ public class CustomerOrder implements Order {
         return orderNumber;
     }
 
-    public void setProductsOrdered(Map<Product, Integer> productsOrdered) {
-        this.productsOrdered = productsOrdered;
-    }
-
-    public Map<Product, Map<Date, Integer>> getProductsDispatched() {
-        return productsDispatched;
-    }
-
-    public void setProductsDispatched(Map<Product, Map<Date, Integer>> productsDispatched) {
-        this.productsDispatched = productsDispatched;
-    }
-
     public Map<Product, Map<Date, Integer>> getProductsDelivered() {
         return productsDelivered;
     }
@@ -127,11 +120,7 @@ public class CustomerOrder implements Order {
         this.productsDelivered = productsDelivered;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public BigDecimal getTotalPrice(BigDecimal totalPrice) {
+        return totalPrice;
     }
 }
