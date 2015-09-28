@@ -9,13 +9,35 @@ import java.util.Map;
  * Created by Jo on 28/09/2015.
  */
 public class CustomerOrder implements Order {
-    private int orderNumber;
+    private static long orderNumberCounter = 0;
+    private final long orderNumber = setOrderNumber();
     private Map<Product, Integer> productsOrdered;
     private Map<Product, Map<Date, Integer>> productsDispatched;
     private Map<Product, Map<Date, Integer>> productsDelivered;
     private BigDecimal totalPrice;
-    private CustomerImpl customer;
+    private Customer customer;
 
+    public CustomerOrder(Map<Product, Integer> productsOrdered, BigDecimal totalPrice, Customer customer) {
+        this.productsOrdered = productsOrdered;
+        this.productsDispatched = null;
+        this.productsDelivered = null;
+        this.totalPrice = totalPrice;
+        this.customer = customer;
+    }
+
+    private long setOrderNumber() {
+        orderNumberCounter += 1;
+        return orderNumberCounter;
+    }
+
+//    private BigDecimal getTotalPrice(Map<Product, Integer> productsOrdered){
+//        BigDecimal totalPrice = BigDecimal.ZERO;
+//        for(Map.Entry<Product, Integer> entry : productsOrdered.entrySet()){
+//            int quantity = entry.getValue();
+//            totalPrice.add(entry.getKey().getPrice().multiply(new BigDecimal(quantity)));
+//        }
+//        return totalPrice;
+//    }
 
     @Override
     public void orderProducts(List<Product> productsToOrder, Integer quantity) {
@@ -75,5 +97,41 @@ public class CustomerOrder implements Order {
     @Override
     public Map<Product, Map<Date, Integer>> getDeliveredProducts() {
         return null;
+    }
+
+    public static long getOrderNumberCounter(){
+        return orderNumberCounter;
+    }
+
+    public long getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setProductsOrdered(Map<Product, Integer> productsOrdered) {
+        this.productsOrdered = productsOrdered;
+    }
+
+    public Map<Product, Map<Date, Integer>> getProductsDispatched() {
+        return productsDispatched;
+    }
+
+    public void setProductsDispatched(Map<Product, Map<Date, Integer>> productsDispatched) {
+        this.productsDispatched = productsDispatched;
+    }
+
+    public Map<Product, Map<Date, Integer>> getProductsDelivered() {
+        return productsDelivered;
+    }
+
+    public void setProductsDelivered(Map<Product, Map<Date, Integer>> productsDelivered) {
+        this.productsDelivered = productsDelivered;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
