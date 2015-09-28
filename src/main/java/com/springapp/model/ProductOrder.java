@@ -8,6 +8,7 @@ import java.util.Map;
  * Created by Jo on 28/09/2015.
  */
 public class ProductOrder implements Order {
+    private int orderNumber;
     private Product product;
     private int quantity;
     private Date dateOrdered;
