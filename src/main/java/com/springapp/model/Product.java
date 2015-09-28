@@ -33,4 +33,8 @@ public interface Product {
     boolean isDiscontinued();
 
     int getStockLevel();
+
+    int adjustStockLevel(int numOfItemsBought);
+
+    int getReorderLevel();
 }

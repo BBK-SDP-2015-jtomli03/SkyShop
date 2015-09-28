@@ -52,11 +52,12 @@ public class ProductService {
 		productDao.closeCurrentSessionwithTransaction();
 	}
 
-	public Product getProduct(String productCode){
-		return null;
-	}
-
 	public ProductDao productDao() {
 		return productDao;
+	}
+
+	//TODO
+	public Product getProduct(String productCode){
+		return null;
 	}
 }
