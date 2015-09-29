@@ -20,7 +20,7 @@
 <body>
 <nav class="white black-text" role="navigation">
   <div class="nav-wrapper container valign-wrapper">
-    <a id="logo-container" href="index" class="brand-logo">
+    <a id="logo-container" href="/" class="brand-logo">
       <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Sky Logo"/>
     </a>
     <ul id="slide-out" class="side-nav full">

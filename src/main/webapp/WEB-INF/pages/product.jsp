@@ -15,29 +15,30 @@
       <div id="modal1" class="modal">
         <div class="modal-content">
           <h4 class="teal-text">Purchase Item Name</h4>
+          <div>
             <div class="col s12"></div>
-              <form>
-                <div class="input-field col s6">
-                  <select>
-                    <option value="" disabled selected>Choose your option</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  <label>Select Quantity</label>
-                </div>
-                <div class="input-field col s6">
-                  <a class="waves-effect waves-light btn"><i class="material-icons left">shopping_basket</i>Add to Basket</a>
-                </div>
-              </form>
+              <div class="input-field col s6">
+                <select>
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <label>Select Quantity</label>
+              </div>
+              <div class="input-field col s6">
+                <a class="waves-effect waves-light btn"><i class="material-icons left">shopping_basket</i>Add to Basket</a>
+              </div>
             </div>
+          </form>
         </div>
         <div class="modal-footer">
           <div class="modal-banner">
           </div>
-          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat large"><i class="material-icons">close</i></a>
+          <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat large">
+            <i class="material-icons">close</i></a>
         </div>
       </div>
 
