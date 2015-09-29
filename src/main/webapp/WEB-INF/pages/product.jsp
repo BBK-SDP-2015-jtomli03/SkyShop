@@ -9,7 +9,38 @@
     <img class="materialboxed" src="<spring:url value="/resources/img/box.jpg" />">
     <div class="section"></div>
     <div class="center">
-      <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">shopping_basket</i></a>
+      <button class="btn-floating btn-large waves-effect waves-light red modal-trigger" onclick="$('#modal1').openModal();"><i class="material-icons">shopping_basket</i></button>
+
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4 class="teal-text">Purchase Item Name</h4>
+            <div class="col s12"></div>
+              <form>
+                <div class="input-field col s6">
+                  <select>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <label>Select Quantity</label>
+                </div>
+                <div class="input-field col s6">
+                  <a class="waves-effect waves-light btn"><i class="material-icons left">shopping_basket</i>Add to Basket</a>
+                </div>
+              </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div class="modal-banner">
+          </div>
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat large"><i class="material-icons">close</i></a>
+        </div>
+      </div>
+
 
       <!-- Dropdown Trigger -->
       <a class='dropdown-button btn btn-floating btn-large waves-effect waves-light blue' href='#' data-activates='dropdown1'>
@@ -92,3 +123,8 @@
 <jsp:include page="modules/gnome.jsp" />
 <jsp:include page="modules/bestsellers.jsp" />
 <jsp:include page="modules/footer.jsp" />
+<script type="application/javascript">
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
