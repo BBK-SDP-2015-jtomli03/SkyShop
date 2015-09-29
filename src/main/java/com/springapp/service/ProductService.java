@@ -58,6 +58,6 @@ public class ProductService {
 
 	//TODO
 	public Product getProduct(String productCode){
-		return null;
+		return null;//***CHANGE TO RETURN A PRODUCT***
 	}
 }

@@ -1,11 +1,27 @@
 package com.springapp.service;
 
+import com.springapp.model.Order;
+
 /**
  * Created by Jo on 28/09/2015.
  */
 public class CustomerOrderService {
 
-    //add a CustomerOrder
+    //TODO
+    //persist a CustomerOrder
+    public void persist(Order entity) {
 
-    //get a CustomerOrder
+    }
+
+    //TODO
+    //return a CustomerOrder, ie Order order = new CustomerOrder()
+    public Order findByOrderNumber(long orderNumber) {
+        return null;
+    }
+
+    //TODO
+    //update a CustomerOrder
+    public void update(Order order){
+
+    }
 }

@@ -28,6 +28,7 @@ public class WarehouseBrain {
     }
 
     public List<CustomerOrder> getAndRemoveCustomerOrders(int numOfOrders){
+        //*****NEED TO MAKE SURE THERE ARE 6 ORDERS******
         List<CustomerOrder> listToReturn = customerOrders.subList(0, 6);
         for(int i = 0; i < numOfOrders; i++){
             customerOrders.remove(i);

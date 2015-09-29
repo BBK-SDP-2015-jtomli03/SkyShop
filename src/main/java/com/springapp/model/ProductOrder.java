@@ -1,5 +1,8 @@
 package com.springapp.model;
 
+import org.joda.time.DateTime;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +11,7 @@ import java.util.Map;
  * Created by Jo on 28/09/2015.
  */
 public class ProductOrder implements Order {
+    private int orderNumber;
     private Product product;
     private int quantity;
     private Date dateOrdered;
@@ -37,22 +41,22 @@ public class ProductOrder implements Order {
     }
 
     @Override
-    public Double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return null;
     }
 
     @Override
-    public String getCustomer() {
+    public Customer getCustomer() {
         return null;
     }
 
     @Override
-    public Date getDateOrderPlaced() {
+    public DateTime getDateOrderPlaced() {
         return null;
     }
 
     @Override
-    public void productDispatched(Product product, Integer quantity) {
+    public void setProductDispatched(Product product, Integer quantity) {
 
     }
 
