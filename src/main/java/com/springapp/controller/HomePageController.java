@@ -27,4 +27,12 @@ public class HomePageController {
 	public String printProduct() {
 		return "product";
 	}
+	@RequestMapping(path = "/show_all", method = RequestMethod.GET)
+	public String printAllProducts() {
+		return "show_all";
+	}
+	@RequestMapping(path = "/basket", method = RequestMethod.GET)
+	public String printBasket() {
+		return "basket";
+	}
 }

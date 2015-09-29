@@ -5,6 +5,14 @@
  *
  * Made By MaterializeCSS.com
  */
+#basket-icon {
+    position: absolute;
+    right: 0px;
+    top: 25px;
+}
+#basket-icon i{
+    font-size: 2.5rem;
+}
 #title-slide {
     height: 300px;
 }
@@ -60,6 +68,10 @@ nav {
 .product {
     padding: 0 !important;
 }
+#totalPrice {
+    text-align: right;
+    font-size: 2.5rem;
+}
 .product img {
     width:100%;
 }
@@ -78,6 +90,10 @@ nav {
     position: absolute;
     z-index: 999;
     will-change: width, height;
+}
+.modal-banner {
+    height:200px;
+    overflow: hidden;
 }
 .mirror {
     transform: scaleX(-1);
