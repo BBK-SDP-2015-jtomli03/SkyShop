@@ -55,7 +55,7 @@ public class CustomerOrderController {
         Map<Product, Integer> products = order.getProductsOrdered();
         String customerName = order.getCustomer().getTitleAndFullName();
         String customerAddress = order.getCustomer().getAddress();
-        
+
         JSONObject SendObject = new JSONObject();
         try {
             String jsonProducts = new ObjectMapper().writeValueAsString(products);
