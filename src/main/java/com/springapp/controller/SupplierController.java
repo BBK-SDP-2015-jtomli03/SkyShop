@@ -16,6 +16,7 @@ import java.util.List;
 public class SupplierController {
     //SupplierService supplierService = new SupplierService();
 
+    //add a new supplier
     @RequestMapping(path = "/add", method = RequestMethod.GET)
     public void addSuppliers() {
         List<Supplier> suppliers = new ArrayList<Supplier>();

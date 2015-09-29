@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * Created by Jo on 28/09/2015.
  */
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/customer/order")
 public class CustomerOrderController {
     CustomerOrderService customerOrderService;
 
@@ -21,6 +21,7 @@ public class CustomerOrderController {
 //        return WarehouseBrain.getWarehouseBrain().getAndRemoveCustomerOrders(6);
 //    }
 
+    //get six orders at a time for warehouse app
     @RequestMapping(value = "/get/six", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     Product getSixOrders() {
@@ -28,6 +29,7 @@ public class CustomerOrderController {
             return product; //*******CHANGE RETURN OBJECT TO ABOVE********
     }
 
+    //get a customer order by the orderNumber
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     Order getOrderByOrderNumber(@RequestBody long orderNumber) {
@@ -35,16 +37,18 @@ public class CustomerOrderController {
         return order;
     }
 
-    @RequestMapping(value = "/order/received", method = RequestMethod.POST)
-    public @ResponseBody void orderReceived(@RequestBody long orderNumber) {
-        //add order to stock
-        //return ok
-    }
-
+    //place a customer order
     @RequestMapping(value = "/place", method = RequestMethod.POST)
     public @ResponseBody void placeOrder(@ModelAttribute("order") CustomerOrder order) {
         WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
         customerOrderService.persist(order);
+        //return ok
+    }
+
+    //dispatch a customer order
+    @RequestMapping(value = "/dispatched", method = RequestMethod.POST)
+    public @ResponseBody void orderDispatched(@ModelAttribute("order") CustomerOrder order) {
+        //handle
         //return ok
     }
 
