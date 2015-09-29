@@ -13,4 +13,13 @@ public class HomePageController {
 		return "index";
 	}
 
+	@RequestMapping(path = "/login", method = RequestMethod.GET)
+	public String printLoginPage() {
+		return "login";
+	}
+
+	@RequestMapping(path = "/account", method = RequestMethod.GET)
+	public String printAccountPage() {
+		return "account";
+	}
 }
