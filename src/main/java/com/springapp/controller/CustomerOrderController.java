@@ -1,7 +1,10 @@
 package com.springapp.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springapp.model.*;
 import com.springapp.service.CustomerOrderService;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * Created by Jo on 28/09/2015.
@@ -28,7 +32,7 @@ public class CustomerOrderController {
     //get six orders at a time for warehouse app
     @RequestMapping(value = "/get/six", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    Map<Product, Integer> getSixOrders() {
+    String getSixOrders() {
         Product product1 = new ProductImpl(1, 2, "productCode", "String name", "String description", new BigDecimal(2.00), "String imageUrl");
         Product product2 = new ProductImpl(1, 2, "productCode", "Gnome", "String description", new BigDecimal(2.00), "String imageUrl");
         Product product3 = new ProductImpl(1, 2, "productCode", "Remote", "String description", new BigDecimal(2.00), "String imageUrl");
@@ -46,9 +50,23 @@ public class CustomerOrderController {
         List<CustomerOrder> orders = new ArrayList<CustomerOrder>();
         orders.add(order);
 
-
-
-        return productsOrdered;
+        //order
+        String orderNum = String.valueOf(order.getOrderNumber());
+        Map<Product, Integer> products = order.getProductsOrdered();
+        String customerName = order.getCustomer().getTitleAndFullName();
+        String customerAddress = order.getCustomer().getAddress();
+        
+        JSONObject SendObject = new JSONObject();
+        try {
+            String jsonProducts = new ObjectMapper().writeValueAsString(products);
+            SendObject.put("OrderNumber", orderNum);
+            SendObject.put("Products", jsonProducts);
+            SendObject.put("CustomerName", customerName);
+            SendObject.put("CustomerAddress", customerAddress);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return SendObject.toString();
     }
 
     //get a customer order by the orderNumber
