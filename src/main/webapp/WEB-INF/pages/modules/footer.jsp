@@ -36,8 +36,11 @@
 </footer>
 
 <!--  Scripts-->
+<spring:url value="/resources/js/jquery-2.1.1.min.js" var="jQuery" />
+<script src="${jQuery}"></script>
+<!--
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
+-->
 <spring:url value="/resources/js/materialize/materialize.js" var="matJs" />
 <script src="${matJs}"></script>
 <spring:url value="/resources/js/init.js" var="initJs" />

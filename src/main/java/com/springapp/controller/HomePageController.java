@@ -22,4 +22,9 @@ public class HomePageController {
 	public String printAccountPage() {
 		return "account";
 	}
+
+	@RequestMapping(path = "/product", method = RequestMethod.GET)
+	public String printProduct() {
+		return "product";
+	}
 }
