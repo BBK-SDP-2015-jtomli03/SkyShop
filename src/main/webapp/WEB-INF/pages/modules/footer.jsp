@@ -45,6 +45,5 @@
 <script src="${matJs}"></script>
 <spring:url value="/resources/js/init.js" var="initJs" />
 <script src="${initJs}"></script>
-
 </body>
 </html>
