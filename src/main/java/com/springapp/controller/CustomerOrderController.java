@@ -1,9 +1,9 @@
 package com.springapp.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springapp.model.*;
 import com.springapp.service.CustomerOrderService;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,31 +42,74 @@ public class CustomerOrderController {
         productsOrdered.put(product2, 20);
         productsOrdered.put(product3, 30);
 
+        Map<Product, Integer> productsOrdered2 = new HashMap<Product, Integer>();
+        productsOrdered.put(product1, 100);
+        productsOrdered.put(product2, 200);
+        productsOrdered.put(product3, 300);
+
         Customer customer = new CustomerImpl();
 
-        //return WarehouseBrain.getWarehouseBrain().getAndRemoveCustomerOrders(6);
         CustomerOrder order = new CustomerOrder(productsOrdered, new BigDecimal(10.00), customer);
+        CustomerOrder order2 = new CustomerOrder(productsOrdered2, new BigDecimal(50.00), customer);
 
         List<CustomerOrder> orders = new ArrayList<CustomerOrder>();
         orders.add(order);
+        orders.add(order2);
 
-        //order
-        String orderNum = String.valueOf(order.getOrderNumber());
-        Map<Product, Integer> products = order.getProductsOrdered();
-        String customerName = order.getCustomer().getTitleAndFullName();
-        String customerAddress = order.getCustomer().getAddress();
-
+        //return WarehouseBrain.getWarehouseBrain().getAndRemoveCustomerOrders(6);
+        int i = 0;
+        String orderNum;
+        Map<Product, Integer> products;
+        String customerName;
+        String customerAddress;
+        String jsonProducts;
         JSONObject SendObject = new JSONObject();
-        try {
-            String jsonProducts = new ObjectMapper().writeValueAsString(products);
-            SendObject.put("OrderNumber", orderNum);
-            SendObject.put("Products", jsonProducts);
-            SendObject.put("CustomerName", customerName);
-            SendObject.put("CustomerAddress", customerAddress);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        JSONObject feedObject = new JSONObject();
+        JSONArray sendArray = new JSONArray();
+//        for(CustomerOrder co: orders) {
+//            //i++;
+//            orderNum = String.valueOf(co.getOrderNumber());
+//            products = co.getProductsOrdered();
+//            customerName = co.getCustomer().getTitleAndFullName();
+//            customerAddress = co.getCustomer().getAddress();
+//            try {
+//                jsonProducts = new ObjectMapper().writeValueAsString(products);
+//
+//                feedObject.put("OrderNumber", orderNum);
+//                feedObject.put("Products", products);
+//                feedObject.put("CustomerName", customerName);
+//                feedObject.put("CustomerAddress", customerAddress);
+//                SendObject.put("Products", feedObject);
+//                sendArray.put(i, SendObject);
+//
+//            //} catch (JsonProcessingException e) {
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+        Map<String, String> jsonToReturn = new HashMap<String, String>();
+        for(CustomerOrder co: orders) {
+            //i++;
+            orderNum = String.valueOf(co.getOrderNumber());
+            products = co.getProductsOrdered();
+            customerName = co.getCustomer().getTitleAndFullName();
+            customerAddress = co.getCustomer().getAddress();
+            try {
+                jsonProducts = new ObjectMapper().writeValueAsString(products);
+                jsonToReturn.put("OrderNumber", orderNum);
+                jsonToReturn.put("Products", jsonProducts);
+                jsonToReturn.put("CustomerName", customerName);
+                jsonToReturn.put("CustomerAddress", customerAddress);
+
+                //} catch (JsonProcessingException e) {
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
-        return SendObject.toString();
+        JSONObject obj = new JSONObject(jsonToReturn);
+
+        return obj.toString();
     }
 
     //get a customer order by the orderNumber
