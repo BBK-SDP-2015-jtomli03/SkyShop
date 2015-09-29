@@ -1,6 +1,10 @@
 package com.springapp.model;
 
+import org.joda.time.DateTime;
+
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,26 +14,27 @@ public interface Order {
 
     //****customer order and purchase order*****
 
-    void addProduct(ProductImpl name, Integer quantity);
+    void orderProducts(List<Product> productsToOrder, Integer quantity);
 
     //return a map of products & quantities on this order
-    Map<ProductImpl, Integer> getProducts();
+    Map<Product, Integer> getProductsOrdered();
 
-    Double getTotalPrice();
+    BigDecimal getTotalPrice();
 
     //returns the customer who placed the order
-    String getCustomer();
+    Customer getCustomer();
 
-    Date getDateOrderPlaced();
+    DateTime getDateOrderPlaced();
 
-    void productDispatched(ProductImpl product, Integer quantity);
+    void setProductDispatched(Product product, Integer quantity);
 
     //check products already dispatched from this order and the date they were dispatched and the quantity dispatched
-    Map<ProductImpl, Map<Date, Integer>> getDispatchedProducts();
+    Map<Product, Map<Date, Integer>> getDispatchedProducts();
 
-    void productDelivered(ProductImpl product, Integer quantity);
+    void productDelivered(Product product, Integer quantity);
 
     //check products already delivered from this order, the date they were delivered and the quantity delivered
-    Map<ProductImpl, Map<Date, Integer>> getDeliveredProducts();
+    Map<Product, Map<Date, Integer>> getDeliveredProducts();
+
 
 }

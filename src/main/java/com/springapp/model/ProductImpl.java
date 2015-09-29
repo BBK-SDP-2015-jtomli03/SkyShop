@@ -16,14 +16,15 @@ public class ProductImpl implements Product {
 	private int id;
 	@Column(name = "code")
 	private String productCode;
-	@Column(name= "name")
-	private String name;
 	@Column(name= "tid")
 	private int productTypeId;
+	@Column(name= "name")
+	private String name;
 	private String description;
 	private BigDecimal price;
 	private String imageUrl;
-	private int stockLevel = 0;
+	private int stockLevel = -100;
+	private int reorderLevel;
 	private List<Supplier> suppliers = new ArrayList<Supplier>();
 	private boolean discontinued = false;
 	private Location location = null;
@@ -96,6 +97,11 @@ public class ProductImpl implements Product {
 		this.stockLevel = stockLevel;
 	}
 
+	public int adjustStockLevel(int numOfItemsBought) {
+		this.stockLevel -= numOfItemsBought;
+		return stockLevel;
+	}
+
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -154,6 +160,23 @@ public class ProductImpl implements Product {
 				+ this.productCode
 				+ " "
 				+ this.name;
+	}
+
+
+	public int getReorderLevel() {
+		return reorderLevel;
+	}
+
+	public void setReorderLevel(int reorderLevel) {
+		this.reorderLevel = reorderLevel;
+	}
+
+	public int getProductTypeId() {
+		return productTypeId;
+	}
+
+	public void setProductTypeId(int productTypeId) {
+		this.productTypeId = productTypeId;
 	}
 }
 

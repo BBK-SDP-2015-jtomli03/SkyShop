@@ -1,7 +1,7 @@
 package com.springapp.service;
 
 import com.springapp.dao.EmployeeDao;
-import com.springapp.model.EmployeeImpl;
+import com.springapp.model.Employee;
 
 import java.util.List;
 
@@ -13,35 +13,35 @@ public class EmployeeService {
 		employeeDao = new EmployeeDao();
 	}
 
-	public void persist(EmployeeImpl entity) {
+	public void persist(Employee entity) {
 		employeeDao.openCurrentSessionwithTransaction();
 		employeeDao.persist(entity);
 		employeeDao.closeCurrentSessionwithTransaction();
 	}
 
-	public void update(EmployeeImpl entity) {
+	public void update(Employee entity) {
 		employeeDao.openCurrentSessionwithTransaction();
 		employeeDao.update(entity);
 		employeeDao.closeCurrentSessionwithTransaction();
 	}
 
-	public EmployeeImpl findById(String id) {
+	public Employee findById(String id) {
 		employeeDao.openCurrentSession();
-		EmployeeImpl employee = employeeDao.findById(id);
+		Employee employee = employeeDao.findById(id);
 		employeeDao.closeCurrentSession();
 		return employee;
 	}
 
 	public void delete(String id) {
 		employeeDao.openCurrentSessionwithTransaction();
-		EmployeeImpl employee = employeeDao.findById(id);
+		Employee employee = employeeDao.findById(id);
 		employeeDao.delete(employee);
 		employeeDao.closeCurrentSessionwithTransaction();
 	}
 
-	public List<EmployeeImpl> findAll() {
+	public List<Employee> findAll() {
 		employeeDao.openCurrentSession();
-		List<EmployeeImpl> employees = employeeDao.findAll();
+		List<Employee> employees = employeeDao.findAll();
 		employeeDao.closeCurrentSession();
 		return employees;
 	}

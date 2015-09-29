@@ -27,4 +27,14 @@ public interface Product {
     String getProductCode();
 
     void setProductCode(String productCode);
+
+    void setSuppliers(List<Supplier> suppliers);
+
+    boolean isDiscontinued();
+
+    int getStockLevel();
+
+    int adjustStockLevel(int numOfItemsBought);
+
+    int getReorderLevel();
 }

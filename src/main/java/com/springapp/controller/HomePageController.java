@@ -9,8 +9,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomePageController {
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome() {
+	public String printHomePage() {
 		return "index";
 	}
 
+	@RequestMapping(path = "/login", method = RequestMethod.GET)
+	public String printLoginPage() {
+		return "login";
+	}
+
+	@RequestMapping(path = "/account", method = RequestMethod.GET)
+	public String printAccountPage() {
+		return "account";
+	}
+
+	@RequestMapping(path = "/product", method = RequestMethod.GET)
+	public String printProduct() {
+		return "product";
+	}
 }
