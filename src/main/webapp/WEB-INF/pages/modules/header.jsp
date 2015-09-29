@@ -25,9 +25,10 @@
     </a>
     <ul id="slide-out" class="side-nav full">
       <li><a href="/login">Log In</a> </li>
-      <li></li>
+      <li disabled>&nbsp;</li>
       <li><a href="/">Home page</a></li>
       <li><a href="/account">Your Account</a></li>
+      <li><a href="/product">Example Product</a></li>
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse">
       <i class="large mdi-navigation-menu black-text"></i>
