@@ -22,15 +22,20 @@ public class WarehouseBrainTest {
     Customer customer;
     Map<Product, Integer> productsOrdered;
     Product product;
+    Product product2;
     CustomerOrder customerOrder;
+    CustomerOrder customerOrder2;
 
     @Before
     public void setup() {
-        product = new ProductImpl(1, 1, "code", "product", "aproduct", new BigDecimal(1.00), "image");
+        product = new ProductImpl(1, 10, "code", "product", "aproduct", new BigDecimal(1.00), "image");
+        product2 = new ProductImpl(2, 20, "code", "product", "aproduct", new BigDecimal(2.00), "image");
         productsOrdered = new HashMap<Product, Integer>();
         productsOrdered.put(product, 1);
+        productsOrdered.put(product2, 1);
         customer = new CustomerImpl();
         customerOrder = new CustomerOrder(productsOrdered, new BigDecimal(10.00), customer);
+        customerOrder2 = new CustomerOrder(productsOrdered, new BigDecimal(20.00), customer);
     }
 
     @Test
@@ -43,6 +48,15 @@ public class WarehouseBrainTest {
     @Test
     public void testgetNextCustomerOrderIfOneCustomerOrder() {
         WarehouseBrain.getWarehouseBrain().addCustomerOrder(customerOrder);
+        BigDecimal expected = new BigDecimal(10.00);
+        BigDecimal result = WarehouseBrain.getWarehouseBrain().getNextCustomerOrder().getTotalPrice();
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testgetNextCustomerOrderIfMoreThanOneCustomerOrder() {
+        WarehouseBrain.getWarehouseBrain().addCustomerOrder(customerOrder);
+        WarehouseBrain.getWarehouseBrain().addCustomerOrder(customerOrder2);
         BigDecimal expected = new BigDecimal(10.00);
         BigDecimal result = WarehouseBrain.getWarehouseBrain().getNextCustomerOrder().getTotalPrice();
         assertEquals(expected, result);
