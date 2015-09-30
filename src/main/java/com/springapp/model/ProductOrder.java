@@ -61,7 +61,7 @@ public class ProductOrder implements Order {
     }
 
     @Override
-    public Map<Product, Map<Date, Integer>> getDispatchedProducts() {
+    public Map<Product, Map<DateTime, Integer>> getDispatchedProducts() {
         return null;
     }
 
@@ -71,7 +71,7 @@ public class ProductOrder implements Order {
     }
 
     @Override
-    public Map<Product, Map<Date, Integer>> getDeliveredProducts() {
+    public Map<Product, Map<DateTime, Integer>> getDeliveredProducts() {
         return null;
     }
 }

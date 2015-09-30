@@ -3,9 +3,7 @@ package com.springapp.model;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Jo on 28/09/2015.
@@ -16,16 +14,16 @@ public class CustomerOrder implements Order {
     private final long orderNumber = setOrderNumber();
     private DateTime dateOrderPlaced;
     private Map<Product, Integer> productsOrdered;
-    private Map<Product, Map<Date, Integer>> productsDispatched;
-    private Map<Product, Map<Date, Integer>> productsDelivered;
+    private Map<Product, Map<DateTime, Integer>> productsDispatched;
+    private Map<Product, Map<DateTime, Integer>> productsDelivered;
     private BigDecimal totalPrice;
     private Customer customer;
 
     public CustomerOrder(Map<Product, Integer> productsOrdered, BigDecimal totalPrice, Customer customer) {
         this.dateOrderPlaced  = new DateTime();
         this.productsOrdered = productsOrdered;
-        this.productsDispatched = null;
-        this.productsDelivered = null;
+        this.productsDispatched = new HashMap<Product, Map<DateTime, Integer>>();
+        this.productsDelivered = new HashMap<Product, Map<DateTime, Integer>>();
         this.totalPrice = totalPrice;
         this.customer = customer;
     }
@@ -87,11 +85,13 @@ public class CustomerOrder implements Order {
 
     @Override
     public void setProductDispatched(Product product, Integer quantity) {
-
+        Map<DateTime, Integer> dateQuantity = new HashMap<DateTime, Integer>();
+        dateQuantity.put(new DateTime(), quantity);
+        productsDispatched.put(product, dateQuantity);
     }
 
     @Override
-    public Map<Product, Map<Date, Integer>> getDispatchedProducts() {
+    public Map<Product, Map<DateTime, Integer>> getDispatchedProducts() {
         return productsDispatched;
     }
 
@@ -101,7 +101,7 @@ public class CustomerOrder implements Order {
     }
 
     @Override
-    public Map<Product, Map<Date, Integer>> getDeliveredProducts() {
+    public Map<Product, Map<DateTime, Integer>> getDeliveredProducts() {
         return productsDelivered;
     }
 
@@ -113,11 +113,11 @@ public class CustomerOrder implements Order {
         return orderNumber;
     }
 
-    public Map<Product, Map<Date, Integer>> getProductsDelivered() {
+    public Map<Product, Map<DateTime, Integer>> getProductsDelivered() {
         return productsDelivered;
     }
 
-    public void setProductsDelivered(Map<Product, Map<Date, Integer>> productsDelivered) {
+    public void setProductsDelivered(Map<Product, Map<DateTime, Integer>> productsDelivered) {
         this.productsDelivered = productsDelivered;
     }
 
