@@ -5,6 +5,9 @@
  *
  * Made By MaterializeCSS.com
  */
+.circle{
+    max-width: 100%;
+}
 #basket-icon {
     position: absolute;
     right: 0px;
