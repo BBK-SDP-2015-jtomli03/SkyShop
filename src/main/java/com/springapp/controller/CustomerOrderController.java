@@ -3,12 +3,9 @@ package com.springapp.controller;
 import com.springapp.model.*;
 import com.springapp.service.CustomerOrderService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,9 +28,9 @@ public class CustomerOrderController {
 //    }
 
     //get six orders at a time for warehouse app
-    @RequestMapping(value = "/pick", method = RequestMethod.GET, produces = "application/json")//, produces = "application/json")
+    @RequestMapping(value = "/pick", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    Order getOrderToPick() {
+    CustomerOrder getOrderToPick() {
         Product product1 = new ProductImpl(1, 2, "productCode", "String name", "String description", new BigDecimal(2.00), "String imageUrl");
         Product product2 = new ProductImpl(2, 2, "productCode", "Gnome", "String description", new BigDecimal(2.00), "String imageUrl");
         Product product3 = new ProductImpl(3, 2, "productCode", "Remote", "String description", new BigDecimal(2.00), "String imageUrl");
@@ -57,8 +54,10 @@ public class CustomerOrderController {
         orders.add(order);
         orders.add(order2);
 
-        order.setProductDispatched(product1, 5);
-        return order;
+        WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
+        WarehouseBrain.getWarehouseBrain().addCustomerOrder(order2);
+
+        return WarehouseBrain.getWarehouseBrain().getNextCustomerOrder();
     }
 
     //get a customer order by the orderNumber
@@ -112,29 +111,29 @@ public class CustomerOrderController {
             long orderNumber = Long.parseLong(orderNumArray[0]);
             //get order from DB
             Order order = null;
-            Product product = null;
-            for(int i = 1; i < orderNumArray.length - 1; i+=2){
-                int productID = Integer.parseInt(orderNumArray[i]);
-                int quantity = Integer.parseInt(orderNumArray[i+1]);
-                //get product from DB
-                //order.setProductDispatched();
-            }
-
-
+            setProductsAsDispatched(orderNumArray, order);
             //Daves class to send text
             return new ResponseEntity<String>(HttpStatus.OK);
         }catch(Exception ex){
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
+    }
 
-
+    public void setProductsAsDispatched(String[] orderNumArray, Order order){
+        Product product = null;
+        for(int i = 1; i < orderNumArray.length - 1; i+=2){
+            int productID = Integer.parseInt(orderNumArray[i]);
+            int quantity = Integer.parseInt(orderNumArray[i+1]);
+            //get product from DB
+            //Product product = db.getProduct(productID);
+            //order.setProductDispatched();
+        }
     }
 
     //dispatch a customer order
     @RequestMapping(value = "/dispatched", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
     public @ResponseBody
     ResponseEntity<String> orderDispatched(@RequestBody String orderNum) {
-
         try{
             long orderNumber = Long.parseLong(orderNum);
             //*********get order from DB by orderNum*************************
@@ -149,5 +148,4 @@ public class CustomerOrderController {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
     }
-
 }

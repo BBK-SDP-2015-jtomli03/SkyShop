@@ -1,5 +1,6 @@
 package com.springapp.model;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ public class CustomerOrderTest {
 
     @Before
     public void setup() {
-        product = new ProductImpl(1, 1, "code", "product", "aproduct", new BigDecimal(1.00), "image");
+        product = new ProductImpl(1, 10, "code", "product", "aproduct", new BigDecimal(1.00), "image");
         productsOrdered = new HashMap<Product, Integer>();
         productsOrdered.put(product, 1);
         customer = new CustomerImpl();
@@ -36,6 +37,19 @@ public class CustomerOrderTest {
         customerOrder = new CustomerOrder(productsOrdered, new BigDecimal(1.00), customer);
         long expected = CustomerOrder.getOrderNumberCounter();
         long result = customerOrder.getOrderNumber();
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testSetFullQuantityOfProductDispatched() {
+        customerOrder = new CustomerOrder(productsOrdered, new BigDecimal(1.00), customer);
+        customerOrder.setProductDispatched(product, 10);
+        Map<DateTime, Integer> map = customerOrder.getDispatchedProducts().get(product);
+        int expected = 10;
+        int result = 0;
+        for (Map.Entry<DateTime, Integer> entry : map.entrySet()) {
+            result = entry.getValue();
+        }
         assertEquals(expected, result);
     }
 
