@@ -85,9 +85,11 @@ public class CustomerOrder implements Order {
 
     @Override
     public void setProductDispatched(Product product, Integer quantity) {
-        Map<DateTime, Integer> dateQuantity = new HashMap<DateTime, Integer>();
-        dateQuantity.put(new DateTime(), quantity);
-        productsDispatched.put(product, dateQuantity);
+        if (quantity != 0) {
+            Map<DateTime, Integer> dateQuantity = new HashMap<DateTime, Integer>();
+            dateQuantity.put(new DateTime(), quantity);
+            productsDispatched.put(product, dateQuantity);
+        }
     }
 
     @Override

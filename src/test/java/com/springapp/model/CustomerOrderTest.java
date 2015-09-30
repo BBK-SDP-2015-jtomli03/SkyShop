@@ -53,4 +53,26 @@ public class CustomerOrderTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    public void testSetProductDispatchedWithHalfTheQuantityDispatched() {
+        customerOrder = new CustomerOrder(productsOrdered, new BigDecimal(1.00), customer);
+        customerOrder.setProductDispatched(product, 5);
+        Map<DateTime, Integer> map = customerOrder.getDispatchedProducts().get(product);
+        int expected = 5;
+        int result = 0;
+        for (Map.Entry<DateTime, Integer> entry : map.entrySet()) {
+            result = entry.getValue();
+        }
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testSetProductDispatchedWithNoneOfTheProductDispatched() {
+        customerOrder = new CustomerOrder(productsOrdered, new BigDecimal(1.00), customer);
+        customerOrder.setProductDispatched(product, 0);
+        Map<DateTime, Integer>  expected = null;
+        Map<DateTime, Integer>  result = customerOrder.getDispatchedProducts().get(product);
+        assertEquals(expected, result);
+    }
+
 }
