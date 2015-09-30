@@ -13,13 +13,14 @@ $( document ).ready(function(){
     }
 );
 
-function addToCart( product, price, num ) {
+function addToCart( product, price, num, id ) {
     var cart = sessionStorage.getItem("cart");
     var cartObject = JSON.parse( cart );
     var cartCopy = cartObject;
     var items = cartCopy.items;
     items.push( {
         "product": product,
+        "id": id,
         "price": price,
         "num": num
     } );
@@ -40,6 +41,11 @@ function basketStartCart() {
 function basketUpdateCart() {
     k = 0;
     var cart = JSON.parse(sessionStorage.getItem("cart"));
+    if(cart.items[0]==null){
+        $('#checkOut').addClass('disabled')
+    } else {
+        $('#checkOut').removeClass('disabled')
+    }
     $(".prod").each(function (i, obj) {
         //console.log("input changed");
         var price = parseFloat($(obj).find('.price').val());
@@ -118,4 +124,69 @@ function emptyCart() {
 function emptyCartButton() {
     emptyCart();
     window.location.href = "/basket";
+}
+
+function checkout() {
+    $('#modal1').openModal();
+    var cart = JSON.parse(sessionStorage.getItem("cart"));
+
+    var items = cart.items;
+    var $tableCart = $( "#checkoutModal");
+    $tableCart.html("");
+    //console.log($tableCart);
+    var html1 = '<form'
+    for( var i = 0; i < items.length; ++i ) {
+        var item = items[i];
+        var product = item.product;
+        var price = item.price;
+        var num = item.num;
+        var html2 = '<div class="row">' +
+            '<div class="col s6">' +
+            '<p class="teal-text">' + num + ' x ' + product + '</p>' +
+            '</div>' +
+            '<div class="col s6">' +
+            '<p class="right teal-text">'+'&pound;' + (price * num).toFixed(2) + '</p>' +
+            '</div></div><hr>';
+        $tableCart.html( $tableCart.html() + html2 );
+    }
+}
+
+function processCheckout(){
+    var sendString = [];
+    //var allProducts = [];
+    //var numProducts = [];
+    var sumPrice = 0;
+    var cart = JSON.parse(sessionStorage.getItem("cart"));
+    var items = cart.items;
+    sendString.push("guest");
+    for( var i = 0; i < items.length; ++i ) {
+        var item = items[i];
+        var id = item.id;
+        var num = item.num;
+        var price = item.price;
+        //allProducts.push(id);
+        //numProducts.push(num);
+        sendString.push(id.toString());
+        sendString.push(num.toString());
+        sumPrice += num*price;
+    }
+    sendString.push(sumPrice.toFixed(2).toString());
+    //sumPrice = sumPrice.toFixed(2);
+
+    //console.log(sendString.toString());
+    //jQuery.post( "/customer/order/place", "1,2,3", function()  {
+    //    alert( "test" );
+    //});
+    console.log(JSON.stringify(cart));
+    jQuery.ajax({
+        type: "POST",
+        data: {sendString:sendString},
+        url: "/customer/order/place",
+        success:function(data) {
+            console.log(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert(textStatus);
+        }
+    });
 }

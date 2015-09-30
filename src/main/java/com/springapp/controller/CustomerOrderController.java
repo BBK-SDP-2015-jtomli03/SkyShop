@@ -3,9 +3,12 @@ package com.springapp.controller;
 import com.springapp.model.*;
 import com.springapp.service.CustomerOrderService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,13 +126,39 @@ public class CustomerOrderController {
         return order;
     }
 
+
     //place a customer order
-    @RequestMapping(value = "/place", method = RequestMethod.POST)
-    public @ResponseBody void placeOrder(@ModelAttribute("order") CustomerOrder order) {
-        WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
-        customerOrderService.persist(order);
-        //return ok
+    @RequestMapping(value = "/place", method = RequestMethod.POST, consumes = "application/json")
+    //public @ResponseBody void placeOrder(@RequestBody String[] order) {
+    public String placeOrder(@RequestParam(value="myArray") String[] parameters){
+        //WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
+        //customerOrderService.persist(order);
+        //return oks
+        return "";
     }
+
+
+    /*
+    @RequestMapping("/place")
+    public class placeOrder {
+        @RequestMapping(method = RequestMethod.POST)
+        public @ResponseBody
+        Cart add(HttpServletRequest request, HttpServletResponse response)
+                throws Exception {
+
+            Cart cart = new Cart();
+
+            String[] products = request.getParameter("products");
+            String[] numbers = request.getParameter("numberOfProducts");
+            String totalPrice = request.getParameter("totPrice");
+
+            cart.setProducts(products);
+            cart.setCustomer("guest");
+            cart.setQuantities(numbers);
+            cart.setTotalPrice(totalPrice);
+        }
+    }
+    */
 
     //dispatch a customer order
     @RequestMapping(value = "/dispatched/errors", method = RequestMethod.POST, consumes="application/json", produces = "application/json")

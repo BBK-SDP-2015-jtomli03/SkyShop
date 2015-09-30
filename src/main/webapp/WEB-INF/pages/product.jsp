@@ -26,6 +26,7 @@
             <div class="col s12"></div>
               <form id="add-product" action="/basket" >
                 <div class="input-field col s6">
+                  <input id="id" value="1" class="hide">
                   <select id="number">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -143,8 +144,8 @@
       var prodVal = $(this).parent().parent().find('#prodValue').html();
       var val = Number(prodVal.replace(/[^0-9\.]+/g,""));
       var num = $('#number').val();
-      //console.log(prodName,val,num);
-      addToCart(prodName,val,num);
+      var id = $('#id').val();
+      addToCart(prodName,val,num,id);
     });
   });
 </script>
