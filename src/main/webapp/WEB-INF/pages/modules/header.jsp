@@ -20,18 +20,23 @@
 <body>
 <nav class="white black-text" role="navigation">
   <div class="nav-wrapper container valign-wrapper">
-    <a id="logo-container" href="#" class="brand-logo">
+    <a id="logo-container" href="/" class="brand-logo">
       <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="Sky Logo"/>
     </a>
     <ul id="slide-out" class="side-nav full">
       <li><a href="/login">Log In</a> </li>
+      <li><a href="/basket">Shopping Basket</a> </li>
       <li disabled>&nbsp;</li>
       <li><a href="/">Home page</a></li>
       <li><a href="/account">Your Account</a></li>
+      <li><a href="/show_all">All Products</a></li>
       <li><a href="/product">Example Product</a></li>
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse">
       <i class="large mdi-navigation-menu black-text"></i>
     </a>
+    <ul id="basket-icon">
+      <li><a href="/basket"><i class="material-icons black-text">shopping_basket</i></a></li>
+    </ul>
   </div>
 </nav>

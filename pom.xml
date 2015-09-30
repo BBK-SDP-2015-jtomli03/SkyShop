@@ -9,6 +9,7 @@
 
     <properties>
         <spring.version>4.2.1.RELEASE</spring.version>
+        <jackson.version>1.9.10</jackson.version>
     </properties>
 
     <dependencies>
@@ -68,13 +69,12 @@
             <artifactId>hibernate-core</artifactId>
             <version>4.3.6.Final</version>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.36</version>
         </dependency>
-        <dependency>
+        <dependency><!-- Jackson JSON Mapper -->
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.6.0</version>
@@ -94,6 +94,21 @@
             <artifactId>joda-time</artifactId>
             <version>2.8.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20150729</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>net.sf.flexjson</groupId>-->
+            <!--<artifactId>flexjson</artifactId>-->
+            <!--<version>3.3</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.roo</groupId>-->
+            <!--<artifactId>org.springframework.roo.addon.json</artifactId>-->
+            <!--<version>1.3.2.RELEASE</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

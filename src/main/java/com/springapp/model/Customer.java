@@ -14,4 +14,8 @@ public interface Customer {
     List<Order> getOrders();
 
     void addOrder(Order order);
+
+    String getAddress();
+
+    String getTitleAndFullName();
 }

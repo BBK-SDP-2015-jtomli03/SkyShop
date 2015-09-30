@@ -19,30 +19,34 @@
 <div class="section">
 </div>
 <div class="row">
-	<div class="col s12 m12 l4">
-		<div class="icon-block">
-			<h2 class="center light-blue-text"><i class="large material-icons">thumb_up</i></h2>
-			<h5 class="center">Speeds up development</h5>
+	<div class="col s10 offset-s1">
+		<div class="row">
+			<div class="col s12 m12 l4">
+				<div class="icon-block">
+					<h2 class="center light-blue-text"><i class="large material-icons">thumb_up</i></h2>
+					<h5 class="center">Speeds up development</h5>
 
-			<p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-		</div>
-	</div>
+					<p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				</div>
+			</div>
 
-	<div class="col s12 m6 l4">
-		<div class="icon-block">
-			<h2 class="center light-blue-text"><i class="large material-icons">shopping_cart</i></h2>
-			<h5 class="center">User Experience Focused</h5>
+			<div class="col s12 m6 l4">
+				<div class="icon-block">
+					<h2 class="center light-blue-text"><i class="large material-icons">shopping_cart</i></h2>
+					<h5 class="center">User Experience Focused</h5>
 
-			<p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-		</div>
-	</div>
+					<p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				</div>
+			</div>
 
-	<div class="col s12 m6 l4">
-		<div class="icon-block">
-			<h2 class="center light-blue-text"><i class="large material-icons">phone</i></h2>
-			<h5 class="center">Easy to work with</h5>
+			<div class="col s12 m6 l4">
+				<div class="icon-block">
+					<h2 class="center light-blue-text"><i class="large material-icons">phone</i></h2>
+					<h5 class="center">Easy to work with</h5>
 
-			<p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

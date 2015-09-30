@@ -45,6 +45,7 @@
 <script src="${matJs}"></script>
 <spring:url value="/resources/js/init.js" var="initJs" />
 <script src="${initJs}"></script>
-
+<spring:url value="/resources/js/cart.js" var="cartJs" />
+<script src="${cartJs}"></script>
 </body>
 </html>
