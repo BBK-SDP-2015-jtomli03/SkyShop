@@ -24,7 +24,7 @@
           </div>
           <div>
             <div class="col s12"></div>
-              <form id="add-product" >
+              <form id="add-product" action="/basket" >
                 <div class="input-field col s6">
                   <select id="number">
                     <option value="1">1</option>
