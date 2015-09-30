@@ -34,15 +34,6 @@ public class CustomerOrder implements Order {
         return orderNumberCounter;
     }
 
-//    private BigDecimal getTotalPrice(Map<Product, Integer> productsOrdered){
-//        BigDecimal totalPrice = BigDecimal.ZERO;
-//        for(Map.Entry<Product, Integer> entry : productsOrdered.entrySet()){
-//            int quantity = entry.getValue();
-//            totalPrice.add(entry.getKey().getPrice().multiply(new BigDecimal(quantity)));
-//        }
-//        return totalPrice;
-//    }
-
     @Override
     public void orderProducts(List<Product> productsToOrder, Integer quantity) {
         int productStockLevel;

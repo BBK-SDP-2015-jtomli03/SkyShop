@@ -55,63 +55,6 @@ public class CustomerOrderController {
         orders.add(order2);
 
         order.setProductDispatched(product1, 5);
-
-        //return WarehouseBrain.getWarehouseBrain().getAndRemoveCustomerOrders(6);
-        //int i = 0;
-        String orderNum;
-        Map<Product, Integer> products;
-        String customerName;
-        String customerAddress;
-        String jsonProducts;
-        //ObjectMapper mapper = new ObjectMapper();
-
-
-//        JSONObject SendObject = new JSONObject();
-//        JSONObject feedObject = new JSONObject();
-//        JSONArray sendArray = new JSONArray();
-//        for(CustomerOrder co: orders) {
-//            //i++;
-//            orderNum = String.valueOf(co.getOrderNumber());
-//            products = co.getProductsOrdered();
-//            customerName = co.getCustomer().getTitleAndFullName();
-//            customerAddress = co.getCustomer().getAddress();
-//            try {
-//                jsonProducts = new ObjectMapper().writeValueAsString(products);
-//
-//                feedObject.put("OrderNumber", orderNum);
-//                feedObject.put("Products", products);
-//                feedObject.put("CustomerName", customerName);
-//                feedObject.put("CustomerAddress", customerAddress);
-//                SendObject.put("Products", feedObject);
-//                sendArray.put(i, SendObject);
-//
-//            //} catch (JsonProcessingException e) {
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-//        Map<String, String> jsonToReturn = new HashMap<String, String>();
-//        for(CustomerOrder co: orders) {
-//            //i++;
-//            orderNum = String.valueOf(co.getOrderNumber());
-//            products = co.getProductsOrdered();
-//            customerName = co.getCustomer().getTitleAndFullName();
-//            customerAddress = co.getCustomer().getAddress();
-//            try {
-//                //jsonProducts = mapper.writeValueAsString(products);
-//                jsonToReturn.put("OrderNumber", orderNum);
-//                //jsonToReturn.put("Products", jsonProducts);
-//                jsonToReturn.put("CustomerName", customerName);
-//                jsonToReturn.put("CustomerAddress", customerAddress);
-//                //} catch (JsonProcessingException e) {
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-        //JSONObject obj = new JSONObject(jsonToReturn);
-        //String jsonObject = JSONObject.valueToString(jsonToReturn);
-        //return jsonObject;
         return order;
     }
 

@@ -27,13 +27,13 @@ public class WarehouseBrain {
         return customerOrders;
     }
 
-    public List<CustomerOrder> getAndRemoveCustomerOrders(int numOfOrders){
-        //*****NEED TO MAKE SURE THERE ARE 6 ORDERS******
-        List<CustomerOrder> listToReturn = customerOrders.subList(0, 6);
-        for(int i = 0; i < numOfOrders; i++){
-            customerOrders.remove(i);
+    public CustomerOrder getNextCustomerOrder(){
+        CustomerOrder order = null;
+        if(customerOrders != null && !customerOrders.isEmpty()){
+            order = customerOrders.get(0);
+            customerOrders.remove(0);
         }
-        return listToReturn;
+        return order;
     }
 
     //adds a product order to the list
