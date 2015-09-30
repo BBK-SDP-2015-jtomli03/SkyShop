@@ -40,6 +40,11 @@ function basketStartCart() {
 function basketUpdateCart() {
     k = 0;
     var cart = JSON.parse(sessionStorage.getItem("cart"));
+    if(cart.items[0]==null){
+        $('#checkOut').addClass('disabled')
+    } else {
+        $('#checkOut').removeClass('disabled')
+    }
     $(".prod").each(function (i, obj) {
         //console.log("input changed");
         var price = parseFloat($(obj).find('.price').val());
@@ -118,4 +123,54 @@ function emptyCart() {
 function emptyCartButton() {
     emptyCart();
     window.location.href = "/basket";
+}
+
+function checkout() {
+    $('#modal1').openModal();
+    var cart = JSON.parse(sessionStorage.getItem("cart"));
+
+    var items = cart.items;
+    var $tableCart = $( "#checkoutModal");
+    $tableCart.html("");
+    //console.log($tableCart);
+
+    for( var i = 0; i < items.length; ++i ) {
+        var item = items[i];
+        var product = item.product;
+        var price = item.price;
+        var num = item.num;
+        var html2 = '<div class="row">' +
+            '<div class="col s6">' +
+            '<p class="teal-text">' + num + ' x ' + product + '</p>' +
+            '</div>' +
+            '<div class="col s6">' +
+            '<p class="right teal-text">'+'&pound;' + price * num.toFixed(2) + '</p>' +
+            '</div></div><hr>';
+        $tableCart.html( $tableCart.html() + html2 );
+    }
+}
+
+function processCheckout(){
+    var cart = JSON.parse(sessionStorage.getItem("cart"));
+
+    var totPrice = 0;
+
+    var items = cart.items;
+    var products = [];
+    var numItems = [];
+    for( var i = 0; i < items.length; ++i ) {
+        var item = items[i];
+        products[i] = item.product;
+        numItems[i] = item.num;
+        var price = item.price;
+        totPrice += numItems[i]*price;
+    }
+    //console.log(products,numItems,totPrice,"guest");
+    console.log($.post(
+        "/customer/order/place",
+        { products: products, numberOfProducts: numItems, price: totPrice, customer:"guest" },
+        function(){
+            alert("Test");
+        }
+ ));
 }
