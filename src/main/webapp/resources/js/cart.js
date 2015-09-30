@@ -48,7 +48,10 @@ function basketUpdateCart() {
         if (parseInt(num)==0){
             var cart = JSON.parse(sessionStorage.getItem("cart"));
             $(obj).parent().parent().remove();
-            delete cart.items[id];
+            console.log(id);
+            cart.items.splice(parseInt(id),1);
+            var jsonStr = JSON.stringify( cart );
+            sessionStorage.setItem( "cart", jsonStr );
         } else {
             j = price * num;
             k += j;
