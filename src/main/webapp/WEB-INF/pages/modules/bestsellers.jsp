@@ -7,7 +7,7 @@
     <div class="col m10 offset-m1">
       <div class="row">
         <div class="col m4">
-            <div class="card small">
+            <div class="card small hoverable">
               <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="<spring:url value="/resources/img/gnome.JPG" />">
               </div>
@@ -27,7 +27,7 @@
             </div>
           </div>
         <div class="col m4">
-          <div class="card small">
+          <div class="card small hoverable">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="<spring:url value="/resources/img/gnome.JPG" />">
             </div>
@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="col m4">
-          <div class="card small">
+          <div class="card small hoverable">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="<spring:url value="/resources/img/gnome.JPG" />">
             </div>
@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="col m4">
-          <div class="card small">
+          <div class="card small hoverable">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="<spring:url value="/resources/img/gnome.JPG" />">
             </div>
@@ -87,7 +87,7 @@
           </div>
         </div>
         <div class="col m4">
-          <div class="card small">
+          <div class="card small hoverable">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="<spring:url value="/resources/img/gnome.JPG" />">
             </div>
@@ -107,7 +107,7 @@
           </div>
         </div>
         <div class="col m4">
-          <div class="card small">
+          <div class="card small hoverable">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="<spring:url value="/resources/img/gnome.JPG" />">
             </div>

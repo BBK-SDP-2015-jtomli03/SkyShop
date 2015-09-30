@@ -14,23 +14,31 @@
       <!-- Modal Structure -->
       <div id="modal1" class="modal">
         <div class="modal-content">
-          <h4 class="teal-text">Purchase Item Name</h4>
+          <div class="row">
+            <div class="col s6">
+              <h4 id="prodName" class="teal-text">Purchase Item Name</h4>
+            </div>
+            <div class="col s6">
+              <h4 id="prodValue" class="teal-text">&pound;4.99</h4>
+            </div>
+          </div>
           <div>
             <div class="col s12"></div>
-              <div class="input-field col s6">
-                <select>
-                  <option value="" disabled selected>Choose your option</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-                <label>Select Quantity</label>
-              </div>
-              <div class="input-field col s6">
-                <a class="waves-effect waves-light btn"><i class="material-icons left">shopping_basket</i>Add to Basket</a>
-              </div>
+              <form id="add-product" >
+                <div class="input-field col s6">
+                  <select id="number">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <label>Select Quantity</label>
+                </div>
+                <div class="input-field col s6">
+                  <button type="submit" class="waves-effect waves-light btn"><i class="material-icons left">shopping_basket</i>Add to Basket</button>
+                </div>
+              </form>
             </div>
           </form>
         </div>
@@ -49,12 +57,14 @@
       </a>
 
       <!-- Dropdown Structure -->
+      <!--
       <ul id='dropdown1' class='dropdown-buttons'>
-        <li><a class="btn-floating red"></a></li>
-        <li><a class="btn-floating yellow darken-1"></a></li>
-        <li><a class="btn-floating green"></a></li>
-        <li><a class="btn-floating blue"></a></li>
+        <li><a class="btn-floating btn-large red"></a></li>
+        <li><a class="btn-floating btn-large yellow darken-1"></a></li>
+        <li><a class="btn-floating btn-large green"></a></li>
+        <li><a class="btn-floating btn-large blue"><i class="mdi mdi-facebook"></i></a></li>
       </ul>
+      -->
 
     </div>
     <div class="section"></div>
@@ -78,7 +88,7 @@
   <h4 class="center">Similar Products</h4>
   <div class="section"></div>
   <div class="col l3 s6">
-    <div class="card">
+    <div class="card hoverable">
       <div class="card-image waves-effect waves-block waves-light">
         <img src="<spring:url value="/resources/img/gnome.JPG" />">
           <span class="card-title">Product Title
@@ -88,7 +98,7 @@
     </div>
   </div>
   <div class="col l3 s6">
-    <div class="card">
+    <div class="card hoverable">
       <div class="card-image waves-effect waves-block waves-light">
         <img src="<spring:url value="/resources/img/gnome.JPG" />">
           <span class="card-title">Product Title
@@ -98,7 +108,7 @@
     </div>
   </div>
   <div class="col l3 s6">
-    <div class="card">
+    <div class="card hoverable">
       <div class="card-image waves-effect waves-block waves-light">
         <img src="<spring:url value="/resources/img/gnome.JPG" />">
           <span class="card-title">Product Title
@@ -108,7 +118,7 @@
     </div>
   </div>
   <div class="col l3 s6">
-    <div class="card">
+    <div class="card hoverable">
       <div class="card-image waves-effect waves-block waves-light">
         <img src="<spring:url value="/resources/img/gnome.JPG" />">
           <span class="card-title">Product Title
@@ -127,5 +137,13 @@
 <script type="application/javascript">
   $(document).ready(function() {
     $('select').material_select();
+    $( "#add-product" ).submit(function( event ) {
+      var prodName = $(this).parent().parent().find('#prodName').html();
+      var prodVal = $(this).parent().parent().find('#prodValue').html();
+      var val = Number(prodVal.replace(/[^0-9\.]+/g,""));
+      var num = $('#number').val();
+      //console.log(prodName,val,num);
+      addToCart(prodName,val,num);
+    });
   });
 </script>
