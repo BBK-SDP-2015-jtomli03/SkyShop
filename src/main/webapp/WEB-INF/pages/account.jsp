@@ -152,7 +152,7 @@
       <div class="input-field col m6 s12">
         <h4 class="header blue-grey-text">Notifications</h4>
         <hr>
-        <p>Choose how we get in touch with you regrarding orders and dispatches.</p>
+        <p>Choose how we get in touch with you regarding orders and dispatches.</p>
         <div class="input-field switch col s12">
           <label>
             Email:

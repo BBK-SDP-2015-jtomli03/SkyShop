@@ -39,6 +39,7 @@ function basketStartCart() {
 
 function basketUpdateCart() {
     k = 0;
+    var cart = JSON.parse(sessionStorage.getItem("cart"));
     $(".prod").each(function (i, obj) {
         //console.log("input changed");
         var price = parseFloat($(obj).find('.price').val());
@@ -46,16 +47,16 @@ function basketUpdateCart() {
         var name = parseFloat($(obj).find('.name').val());
         var id = parseFloat($(obj).find('.id').val());
         if (parseInt(num)==0){
-            var cart = JSON.parse(sessionStorage.getItem("cart"));
             $(obj).parent().parent().remove();
             console.log(id);
             cart.items.splice(parseInt(id),1);
-            var jsonStr = JSON.stringify( cart );
-            sessionStorage.setItem( "cart", jsonStr );
         } else {
+            cart.items[parseInt(id)].num = parseInt(num);
             j = price * num;
             k += j;
         }
+        var jsonStr = JSON.stringify( cart );
+        sessionStorage.setItem( "cart", jsonStr );
     });
     $("#totalPrice").html("Total: " + "&pound;" + k.toFixed(2));
 
