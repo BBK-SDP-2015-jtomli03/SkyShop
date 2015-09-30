@@ -5,7 +5,7 @@
 <div class="section">
 </div>
 <div class="product row">
-  <div class="col s12 m5 l4 offset-l1 z-depth-2 blue-grey lighten-3">
+  <div class="col s12 m4 offset-m1 z-depth-2 blue-grey lighten-3">
     <img class="materialboxed" src="<spring:url value="/resources/img/box.jpg" />">
     <div class="section"></div>
     <div class="center">
@@ -69,11 +69,12 @@
     </div>
     <div class="section"></div>
   </div>
-  <div class="col s12 m7 offset-l1 l5">
+  <div class="col s12 m5 offset-m1">
     <h3 class="header blue-grey-text">Product Name</h3>
       <hr>
       <p>Long product description... Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </p>
+      <h4 class="right orange-text">&pound;4.99</h4>
   </div>
 </div>
 <div class="section">
