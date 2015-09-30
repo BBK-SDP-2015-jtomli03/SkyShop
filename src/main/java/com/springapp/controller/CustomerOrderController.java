@@ -132,6 +132,33 @@ public class CustomerOrderController {
     }
 
     //dispatch a customer order
+    @RequestMapping(value = "/dispatched/errors", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
+    public @ResponseBody
+    ResponseEntity<String> orderNotFullyDispatched(@RequestBody String[] orderNumArray) {
+
+        try{
+            long orderNumber = Long.parseLong(orderNumArray[0]);
+            //get order from DB
+            Order order = null;
+            Product product = null;
+            for(int i = 1; i < orderNumArray.length - 1; i+=2){
+                int productID = Integer.parseInt(orderNumArray[i]);
+                int quantity = Integer.parseInt(orderNumArray[i+1]);
+                //get product from DB
+                //order.setProductDispatched();
+            }
+
+
+            //Daves class to send text
+            return new ResponseEntity<String>(HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
+
+
+    }
+
+    //dispatch a customer order
     @RequestMapping(value = "/dispatched", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
     public @ResponseBody
     ResponseEntity<String> orderDispatched(@RequestBody String[] orderNumArray) {
