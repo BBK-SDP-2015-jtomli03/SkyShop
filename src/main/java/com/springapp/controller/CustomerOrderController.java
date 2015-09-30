@@ -32,8 +32,8 @@ public class CustomerOrderController {
     public @ResponseBody
     Order getOrderToPick() {
         Product product1 = new ProductImpl(1, 2, "productCode", "String name", "String description", new BigDecimal(2.00), "String imageUrl");
-        Product product2 = new ProductImpl(1, 2, "productCode", "Gnome", "String description", new BigDecimal(2.00), "String imageUrl");
-        Product product3 = new ProductImpl(1, 2, "productCode", "Remote", "String description", new BigDecimal(2.00), "String imageUrl");
+        Product product2 = new ProductImpl(2, 2, "productCode", "Gnome", "String description", new BigDecimal(2.00), "String imageUrl");
+        Product product3 = new ProductImpl(3, 2, "productCode", "Remote", "String description", new BigDecimal(2.00), "String imageUrl");
 
         Map<Product, Integer> productsOrdered = new HashMap<Product, Integer>();
         productsOrdered.put(product1, 10);
@@ -136,15 +136,20 @@ public class CustomerOrderController {
     public @ResponseBody
     ResponseEntity<String> orderDispatched(@RequestBody String[] orderNumArray) {
 
-
-        String[] value = orderNumArray;
-
         try{
-            //handle
+            long orderNumber = Long.parseLong(orderNumArray[0]);
+            //get order from DB
+            Order order = null;
+            Product product = null;
+            for(int i = 1; i < orderNumArray.length - 1; i+=2){
+                int productID = Integer.parseInt(orderNumArray[i]);
+                int quantity = Integer.parseInt(orderNumArray[i+1]);
+                //get product from DB
+                //order.setProductDispatched();
+            }
+
+
             //Daves class to send text
-            //return ok
-
-
             return new ResponseEntity<String>(HttpStatus.OK);
         }catch(Exception ex){
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
