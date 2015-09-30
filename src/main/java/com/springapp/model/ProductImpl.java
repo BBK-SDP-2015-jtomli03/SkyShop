@@ -27,7 +27,8 @@ public class ProductImpl implements Product {
 	private int reorderLevel;
 	private List<Supplier> suppliers = new ArrayList<Supplier>();
 	private boolean discontinued = false;
-	private Location location = null;
+	private String shelfLocation = null;
+	private String rowLocation = null;
 
 	public ProductImpl(int id, int tid, String productCode, String name, String description, BigDecimal price, String imageUrl){
 		this.id = id;
@@ -142,26 +143,18 @@ public class ProductImpl implements Product {
 		this.discontinued = discontinued;
 	}
 
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Product: " 	+ this.id
-				+ ": "
-				+ this.productTypeId
-				+ ", "
-				+ this.productCode
-				+ " "
-				+ this.name;
+		return "ProductId: " + id
+				+ ", name "
+				+ name
+				+ ", imageUrl "
+				+ imageUrl
+				+ ", shelf "
+				+ shelfLocation
+				+ ", row "
+				+ rowLocation;
 	}
-
 
 	public int getReorderLevel() {
 		return reorderLevel;
@@ -177,6 +170,22 @@ public class ProductImpl implements Product {
 
 	public void setProductTypeId(int productTypeId) {
 		this.productTypeId = productTypeId;
+	}
+
+	public String getShelfLocation() {
+		return shelfLocation;
+	}
+
+	public void setShelfLocation(String shelfLocation) {
+		this.shelfLocation = shelfLocation;
+	}
+
+	public String getRowLocation() {
+		return rowLocation;
+	}
+
+	public void setRowLocation(String rowLocation) {
+		this.rowLocation = rowLocation;
 	}
 }
 

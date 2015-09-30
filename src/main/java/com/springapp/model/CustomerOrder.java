@@ -10,6 +10,7 @@ import java.util.Map;
 /**
  * Created by Jo on 28/09/2015.
  */
+
 public class CustomerOrder implements Order {
     private static long orderNumberCounter = 0;
     private final long orderNumber = setOrderNumber();
@@ -21,7 +22,7 @@ public class CustomerOrder implements Order {
     private Customer customer;
 
     public CustomerOrder(Map<Product, Integer> productsOrdered, BigDecimal totalPrice, Customer customer) {
-        this.dateOrderPlaced  = new DateTime();;
+        this.dateOrderPlaced  = new DateTime();
         this.productsOrdered = productsOrdered;
         this.productsDispatched = null;
         this.productsDelivered = null;
@@ -66,7 +67,7 @@ public class CustomerOrder implements Order {
 
     @Override
     public Map<Product, Integer> getProductsOrdered() {
-        return null;
+        return productsOrdered;
     }
 
     @Override

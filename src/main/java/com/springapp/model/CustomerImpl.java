@@ -46,5 +46,15 @@ public class CustomerImpl implements Customer{
     public void addOrder(Order order) {
 
     }
+
+    @Override
+    public String getTitleAndFullName(){
+        return title + " " + firstName + " " + lastName;
+    }
+
+    @Override
+    public String getAddress(){
+        return address1 + " " + address2 + " " + town + " " + county + " " + postcode;
+    }
 }
 

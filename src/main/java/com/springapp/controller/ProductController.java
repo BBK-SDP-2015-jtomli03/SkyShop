@@ -42,25 +42,4 @@ public class ProductController {
         //if all gone ok return ok status to client
     }
 
-    @RequestMapping(path = "/order", method = RequestMethod.GET)
-    public void orderProduct() {
-        int id = 0; //***********CHANGE TO REFLECT ID SENT**************
-        int quantity = 100; //***********CHANGE TO REFLECT QUANTITY SENT**************
-        Product product = productService.findById(id);
-        if(product.isDiscontinued()){
-            //return product discontinued
-        }else if(product.getStockLevel() >= 0){
-            Order order = productOrderService.getOrder(product); //check if product already on order
-            if(order == null){
-                new ProductOrder(product, quantity);
-            }else{
-                //return order info -> product already on order
-            }
-        }else{
-            //product is new and this is the first order, therefore add to the catalogue and place order
-            ProductCatalogue.getCatalogue().addProduct(product);
-            new ProductOrder(product, quantity);
-        }
-        //if all gone ok return ok status to client
-    }
 }
