@@ -31,7 +31,9 @@
         </div>
     </div>
 </div>
-
+<form class="hide" action="#" th:action="@{/customer/order/new}" th:object="${greeting}" method="post">
+    <input type="text" th:field="*{id}" />
+</form>
 <jsp:include page="modules/bestsellers.jsp" />
 <jsp:include page="modules/footer.jsp" />
 <script type="application/javascript">
