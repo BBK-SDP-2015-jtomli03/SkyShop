@@ -1,8 +1,14 @@
 package com.springapp.controller;
 
+import com.springapp.model.Cart;
+import com.springapp.model.CustomerOrder;
+import com.springapp.model.Order;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/")
@@ -31,8 +37,17 @@ public class HomePageController {
 	public String printAllProducts() {
 		return "show_all";
 	}
+
 	@RequestMapping(path = "/basket", method = RequestMethod.GET)
-	public String printBasket() {
+	public String printBasket(Model model) {
+		model.addAttribute("order", new CustomerOrder());
 		return "basket";
+	}
+
+	@RequestMapping(value = "/get/cart", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody
+	Cart getOrderByOrderNumber() {
+		Cart cart = new Cart();
+		return cart;
 	}
 }

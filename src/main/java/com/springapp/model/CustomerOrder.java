@@ -19,6 +19,15 @@ public class CustomerOrder implements Order {
     private BigDecimal totalPrice;
     private Customer customer;
 
+    public CustomerOrder(){
+        this.dateOrderPlaced  = new DateTime();
+        this.productsOrdered = null;
+        this.productsDispatched = new HashMap<Product, Map<DateTime, Integer>>();
+        this.productsDelivered = new HashMap<Product, Map<DateTime, Integer>>();
+        this.totalPrice = new BigDecimal(0.00);
+        this.customer = null;
+    }
+
     public CustomerOrder(Map<Product, Integer> productsOrdered, BigDecimal totalPrice, Customer customer) {
         this.dateOrderPlaced  = new DateTime();
         this.productsOrdered = productsOrdered;
