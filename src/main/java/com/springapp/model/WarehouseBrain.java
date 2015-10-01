@@ -45,4 +45,12 @@ public class WarehouseBrain {
     public void addCustomerOrder(Order customerOrder){
         customerOrders.add(customerOrder);
     }
+
+    public Order getCustomerOrder(long num){
+        Order order = null;
+        if(customerOrders != null && !customerOrders.isEmpty()){
+            order = customerOrders.get(2);
+        }
+        return order;
+    }
 }

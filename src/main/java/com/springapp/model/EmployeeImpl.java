@@ -88,7 +88,7 @@ public class EmployeeImpl {
 
 	//Login
 	public String getLogin() {
-		return login;
+		return this.login;
 	}
 	public void setLogin(String login) {
 		this.login = login;
