@@ -6,24 +6,21 @@
       <div class="col l6 s12">
         <h5 class="white-text">About Sky Accessories</h5>
         <p class="grey-text text-lighten-4">
-          Sky Accessories is a traditional catalogue company based in the North-West of England. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </p>
+          Sky Accessories is the newest member of the Sky family. Find the latest in audio visual accessories and much much more, all from the convenience of whether you are in the world.</p>
       </div>
       <div class="col l3 s12">
-        <h5 class="white-text">Settings</h5>
+        <h5 class="white-text">Accounts</h5>
         <ul>
-          <li><a class="white-text" href="#!">Link 1</a></li>
-          <li><a class="white-text" href="#!">Link 2</a></li>
-          <li><a class="white-text" href="#!">Link 3</a></li>
-          <li><a class="white-text" href="#!">Link 4</a></li>
+          <li><a class="white-text" href="/login">Log In</a></li>
+          <li><a class="white-text" href="/account">Account Details</a></li>
         </ul>
       </div>
       <div class="col l3 s12">
-        <h5 class="white-text">Connect</h5>
+        <h5 class="white-text">Site Map</h5>
         <ul>
-          <li><a class="white-text" href="#!">Link 1</a></li>
-          <li><a class="white-text" href="#!">Link 2</a></li>
-          <li><a class="white-text" href="#!">Link 3</a></li>
-          <li><a class="white-text" href="#!">Link 4</a></li>
+          <li><a class="white-text" href="/">Homepage</a></li>
+          <li><a class="white-text" href="/show_all">View All Products</a></li>
+          <li><a class="white-text" href="/product">Example Product</a></li>
         </ul>
       </div>
     </div>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -127,6 +128,12 @@ public class CustomerOrderController {
     }
 
 
+    @RequestMapping(value = "/place", method = RequestMethod.POST)
+    public void Submit(@RequestParam("products") String products,@RequestParam("numbers") String numbers,@RequestParam("cost") String cost, @RequestParam("customer") String customer) {
+        // your logic here
+    }
+
+    /*
     //place a customer order
     @RequestMapping(value = "/place", method = RequestMethod.POST, consumes = "application/json")
     //public @ResponseBody void placeOrder(@RequestBody String[] order) {
@@ -136,7 +143,7 @@ public class CustomerOrderController {
         //return oks
         return "";
     }
-
+    */
 
     /*
     @RequestMapping("/place")

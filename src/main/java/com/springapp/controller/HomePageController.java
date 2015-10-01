@@ -38,6 +38,11 @@ public class HomePageController {
 		return "show_all";
 	}
 
+	@RequestMapping(path = "/confirmation", method = RequestMethod.GET)
+	public String printConfirmation() {
+		return "confirmation";
+	}
+
 	@RequestMapping(path = "/basket", method = RequestMethod.GET)
 	public String printBasket(Model model) {
 		model.addAttribute("order", new CustomerOrder());

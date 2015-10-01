@@ -34,7 +34,7 @@ function basketStartCart() {
     $(".prod").each(function (i, obj) {
         var price = parseFloat($(obj).find('.price').val());
         //var price = $(obj).find('.price').val();
-        $(obj).next().find('h3').html("&pound;" + price);
+        $(obj).next().find('h5').html("&pound;" + price);
     });
 }
 
@@ -102,7 +102,7 @@ function displayFunction() {
                     '<label>Num:</label>' +
                 '</div>' +
                 '<div class="col s6 input-field">' +
-                    '<h3 class="title blue-text"></h3>' +
+                    '<h5 class="title blue-text"></h5>' +
                 '</div>' +
             '</div>' +
             '</div>' +
@@ -134,12 +134,13 @@ function checkout() {
     var $tableCart = $( "#checkoutModal");
     $tableCart.html("");
     //console.log($tableCart);
-    var html1 = '<form'
+    var totalPrice = 0;
     for( var i = 0; i < items.length; ++i ) {
         var item = items[i];
         var product = item.product;
         var price = item.price;
         var num = item.num;
+        totalPrice += num * price;
         var html2 = '<div class="row">' +
             '<div class="col s6">' +
             '<p class="teal-text">' + num + ' x ' + product + '</p>' +
@@ -149,35 +150,41 @@ function checkout() {
             '</div></div><hr>';
         $tableCart.html( $tableCart.html() + html2 );
     }
+    var html = '<div class="col s6 offset-s6">' +
+        '<h4 class="right teal-text">' +
+        '&pound;' +totalPrice.toFixed(2) +
+            '</h4></div>';
+    $tableCart.html( $tableCart.html() + html );
 }
 
 function processCheckout(){
-    var sendString = [];
-    //var allProducts = [];
-    //var numProducts = [];
+    //var sendString = [];
+    var allProducts = [];
+    var numProducts = [];
     var sumPrice = 0;
     var cart = JSON.parse(sessionStorage.getItem("cart"));
     var items = cart.items;
-    sendString.push("guest");
+    //sendString.push("guest");
     for( var i = 0; i < items.length; ++i ) {
         var item = items[i];
         var id = item.id;
         var num = item.num;
         var price = item.price;
-        //allProducts.push(id);
-        //numProducts.push(num);
-        sendString.push(id.toString());
-        sendString.push(num.toString());
+        allProducts.push(id);
+        numProducts.push(num);
+        //sendString.push(id.toString());
+        //sendString.push(num.toString());
         sumPrice += num*price;
     }
-    sendString.push(sumPrice.toFixed(2).toString());
-    //sumPrice = sumPrice.toFixed(2);
+    //sendString.push(sumPrice.toFixed(2).toString());
+    sumPrice = sumPrice.toFixed(2);
 
     //console.log(sendString.toString());
     //jQuery.post( "/customer/order/place", "1,2,3", function()  {
     //    alert( "test" );
     //});
-    console.log(JSON.stringify(cart));
+    //console.log(JSON.stringify(cart));
+    /*
     jQuery.ajax({
         type: "POST",
         data: {sendString:sendString},
@@ -189,4 +196,45 @@ function processCheckout(){
             alert(textStatus);
         }
     });
+    */
+    /*
+    $.ajax({
+        type: "POST",
+        url: "/customer/order/place",
+        data: { name: "John", location: "Boston" },
+        success: function (html) {
+            alert("works");
+        },
+        error: function(e) {
+            console.log("Error:" + e);
+        }
+    });
+    */
+
+    $.ajax({
+        type: "POST",
+        url: "/customer/order/place",
+        data: { products: allProducts.toString(), numbers: numProducts.toString(), cost: sumPrice, customer: "guest"},
+        success: function (html) {
+            window.location.href = "/confirmation";
+            //alert("works");
+        },
+        error: function(e) {
+            alert("Failed to contact the database! Please get in touch.");
+        }
+    });
+
+    /*
+    $.ajax({
+        url: "/customer/order/place",
+        dataType: "json",
+        headers : {
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json'
+        },
+        data: JSON.stringify(["test","test"]),
+        type: "POST",
+        contentType : 'application/json; charset=utf-8',
+    });
+*/
 }
