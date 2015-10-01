@@ -104,6 +104,11 @@ public class CustomerImpl implements Customer {
         return null;
     }
 
+    @Override
+    public int getId() {
+        return customerId;
+    }
+
     public void setAddress(Address address) { this.address = address; }
 
     // mobileNumber

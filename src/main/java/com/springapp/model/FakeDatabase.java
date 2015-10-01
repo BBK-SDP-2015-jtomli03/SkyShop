@@ -15,9 +15,10 @@ public class FakeDatabase {
     private List<Order> customerOrders = new ArrayList<Order>();
 
     public FakeDatabase(){
-        Product product1 = new ProductImpl(1, 2, "productCode", "String name", "String description", new BigDecimal(2.00), "String imageUrl");
-        Product product2 = new ProductImpl(1, 2, "productCode", "Gnome", "String description", new BigDecimal(2.00), "String imageUrl");
-        Product product3 = new ProductImpl(1, 2, "productCode", "Remote", "String description", new BigDecimal(2.00), "String imageUrl");
+        List<Supplier> suppliers = new ArrayList<Supplier>();
+        Product product1 = new ProductImpl(1, "productCode", "String name", "String shortdescription", "longDescription", new BigDecimal(2.00), "String imageUrl", 10, suppliers, "H", "20", 5, false);
+        Product product2 = new ProductImpl(1, "productCode", "Gnome", "shortdescription", "longDescription", new BigDecimal(2.00), "String imageUrl", 10, suppliers, "H", "20", 5, false);
+        Product product3 = new ProductImpl(1, "productCode", "Remote", "shortdescription", "longDescription", new BigDecimal(2.00), "String imageUrl", 10, suppliers, "H", "20", 5, false);
         products.add(product1);
         products.add(product2);
         products.add(product3);
