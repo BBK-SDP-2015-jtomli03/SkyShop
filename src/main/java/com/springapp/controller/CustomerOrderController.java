@@ -1,9 +1,6 @@
 package com.springapp.controller;
 
-import com.springapp.model.CustomerOrder;
-import com.springapp.model.Order;
-import com.springapp.model.Product;
-import com.springapp.model.WarehouseBrain;
+import com.springapp.model.*;
 import com.springapp.service.CustomerOrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +15,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/customer/order")
 public class CustomerOrderController {
-    CustomerOrderService customerOrderService;
-
-//    @RequestMapping(path = "/get/six", method = RequestMethod.GET)
-//    public @ResponseBody
-//    List<CustomerOrder> getSixOrders() {
-//        return WarehouseBrain.getWarehouseBrain().getAndRemoveCustomerOrders(6);
-//    }
+    FakeDatabase fakeDatabase = new FakeDatabase();
 
     //get six orders at a time for warehouse app
     @RequestMapping(value = "/pick", method = RequestMethod.GET, produces = "application/json")
@@ -37,10 +28,9 @@ public class CustomerOrderController {
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     Order getOrderByOrderNumber(@RequestBody long orderNumber) {
-        Order order = customerOrderService.findByOrderNumber(orderNumber);
+        Order order = fakeDatabase.findCustomerOrderByOrderNumber(orderNumber);
         return order;
     }
-
 
     //place a customer order
     @RequestMapping(value = "/place", method = RequestMethod.POST, consumes = "application/json")
