@@ -15,7 +15,7 @@ public interface Customer {
 
     void addOrder(Order order);
 
-    String getAddress();
+    Address getAddress();
 
     String getTitleAndFullName();
 }

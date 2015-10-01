@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.springapp.mvc"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean class="java.net.URI" id="dbUrl">
+        <constructor-arg value="postgres://uradvxrjqigfyz:UhhjlsO2aiKwHvdiV8M-rVxIrd@ec2-54-204-25-54.compute-1.amazonaws.com:5432/d9713utmkorpmq"/>
+    </bean>
+
+
+    ec2-54-204-25-54.compute-1.amazonaws.com
+    Database
+    d9713utmkorpmq
+    User
+    uradvxrjqigfyz
+    Port
+    5432
+    Password
+    Hide UhhjlsO2aiKwHvdiV8M-rVxIrd
+    Psql
+    heroku pg:psql --app sky-accessories-shop DATABASE
+    URL
+    Hide postgres://uradvxrjqigfyz:UhhjlsO2aiKwHvdiV8M-rVxIrd@ec2-54-204-25-54.compute-1.amazonaws.com:5432/d9713utmkorpmq
+
+    <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
+    <property name="driverClassName" value="${database.driverClassName}"/>
+    <property name="url" value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }"/>
+    <property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }"/>
+    <property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }"/>
+    </bean>
+</beans>

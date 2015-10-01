@@ -37,6 +37,15 @@ public class CustomerOrder implements Order {
         this.customer = customer;
     }
 
+    public CustomerOrder(DateTime dateOrderPlaced, Map<Product, Integer> productsOrdered, Map<Product, Map<DateTime, Integer>> productsDispatched, Map<Product, Map<DateTime, Integer>> productsDelivered, BigDecimal totalPrice, Customer customer) {
+        this.dateOrderPlaced = dateOrderPlaced;
+        this.productsOrdered = productsOrdered;
+        this.productsDispatched = productsDispatched;
+        this.productsDelivered = productsDelivered;
+        this.totalPrice = totalPrice;
+        this.customer = customer;
+    }
+
     //sets the order number and increments the orderNumberCounter
     private long setOrderNumber() {
         orderNumberCounter += 1;
