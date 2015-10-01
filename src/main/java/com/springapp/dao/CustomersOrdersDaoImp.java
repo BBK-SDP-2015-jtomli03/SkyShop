@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomersOrdersDaoImp implements CustomersOrdersDao{
+public class CustomersOrdersDaoImp implements CustomersOrdersDao {
 
 	@Override
 	public CustomerOrder getOrderByOrderId(int id) {
@@ -26,8 +26,6 @@ public class CustomersOrdersDaoImp implements CustomersOrdersDao{
 
 	}
 
-
-	private
 
 	@Override
 	public ArrayList<CustomerOrder> getOrdersByCustomerId(int customerId) {
