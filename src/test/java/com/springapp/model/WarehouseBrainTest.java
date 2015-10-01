@@ -61,4 +61,13 @@ public class WarehouseBrainTest {
         BigDecimal result = WarehouseBrain.getWarehouseBrain().getNextCustomerOrder().getTotalPrice();
         assertEquals(expected, result);
     }
+
+    @Test
+    public void testNextCustomerOrderIsRemovedWhenGetNextCustomerOrder() {
+        WarehouseBrain.getWarehouseBrain().addCustomerOrder(customerOrder);
+        WarehouseBrain.getWarehouseBrain().addCustomerOrder(customerOrder2);
+        BigDecimal expected = new BigDecimal(10.00);
+        BigDecimal result = WarehouseBrain.getWarehouseBrain().getNextCustomerOrder().getTotalPrice();
+        assertEquals(expected, result);
+    }
 }

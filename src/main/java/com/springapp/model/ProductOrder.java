@@ -1,9 +1,9 @@
 package com.springapp.model;
 
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,20 +14,21 @@ public class ProductOrder implements Order {
     private int orderNumber;
     private Product product;
     private int quantity;
-    private Date dateOrdered;
-    private Date dateDueToBeDelivered;
+    private DateTime dateOrdered;
+    private DateTime dateDueToBeDelivered;
 
 
     public ProductOrder(Product product){
         this.product = product;
         this.quantity = product.getReorderLevel() * 2;
-        this.dateOrdered = new Date();
+        this.dateOrdered = new DateTime();
     }
 
     public ProductOrder(Product product, int quantity){
         this.product = product;
         this.quantity = quantity;
-        this.dateOrdered = new Date();
+        this.dateOrdered = new DateTime();
+        this.dateDueToBeDelivered =  dateOrdered.plus(Period.days(3));
     }
 
     @Override
