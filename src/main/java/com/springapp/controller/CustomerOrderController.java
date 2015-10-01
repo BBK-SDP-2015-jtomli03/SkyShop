@@ -41,38 +41,18 @@ public class CustomerOrderController {
     }
 
 
-    //place a customer order
-    @RequestMapping(value = "/place", method = RequestMethod.POST, consumes = "application/json")
-    //public @ResponseBody void placeOrder(@RequestBody String[] order) {
-    public String placeOrder(@RequestParam(value="myArray") String[] parameters){
-        //WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
-        //customerOrderService.persist(order);
-        //return oks
-        return "";
-    }
-    */
+//    //place a customer order
+//    @RequestMapping(value = "/place", method = RequestMethod.POST, consumes = "application/json")
+//    //public @ResponseBody void placeOrder(@RequestBody String[] order) {
+//    public String placeOrder(@RequestParam(value="myArray") String[] parameters){
+//        //WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
+//        //customerOrderService.persist(order);
+//        //return oks
+//        return "";
+//    }
+    
 
-    /*
-    @RequestMapping("/place")
-    public class placeOrder {
-        @RequestMapping(method = RequestMethod.POST)
-        public @ResponseBody
-        Cart add(HttpServletRequest request, HttpServletResponse response)
-                throws Exception {
 
-            Cart cart = new Cart();
-
-            String[] products = request.getParameter("products");
-            String[] numbers = request.getParameter("numberOfProducts");
-            String totalPrice = request.getParameter("totPrice");
-
-            cart.setProducts(products);
-            cart.setCustomer("guest");
-            cart.setQuantities(numbers);
-            cart.setTotalPrice(totalPrice);
-        }
-    }
-    */
 
     //dispatch a customer order
     @RequestMapping(value = "/dispatched/errors", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
