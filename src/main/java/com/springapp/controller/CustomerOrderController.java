@@ -23,117 +23,24 @@ import java.util.Map;
 @RestController
 @RequestMapping("/customer/order")
 public class CustomerOrderController {
-    CustomerOrderService customerOrderService;
-
-//    @RequestMapping(path = "/get/six", method = RequestMethod.GET)
-//    public @ResponseBody
-//    List<CustomerOrder> getSixOrders() {
-//        return WarehouseBrain.getWarehouseBrain().getAndRemoveCustomerOrders(6);
-//    }
+    FakeDatabase fakeDatabase = new FakeDatabase();
 
     //get six orders at a time for warehouse app
-    @RequestMapping(value = "/pick", method = RequestMethod.GET, produces = "application/json")//, produces = "application/json")
+    @RequestMapping(value = "/pick", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    Order getOrderToPick() {
-        Product product1 = new ProductImpl(1, 2, "productCode", "String name", "String description", new BigDecimal(2.00), "String imageUrl");
-        Product product2 = new ProductImpl(1, 2, "productCode", "Gnome", "String description", new BigDecimal(2.00), "String imageUrl");
-        Product product3 = new ProductImpl(1, 2, "productCode", "Remote", "String description", new BigDecimal(2.00), "String imageUrl");
-
-        Map<Product, Integer> productsOrdered = new HashMap<Product, Integer>();
-        productsOrdered.put(product1, 10);
-        productsOrdered.put(product2, 20);
-        productsOrdered.put(product3, 30);
-
-        Map<Product, Integer> productsOrdered2 = new HashMap<Product, Integer>();
-        productsOrdered.put(product1, 100);
-        productsOrdered.put(product2, 200);
-        productsOrdered.put(product3, 300);
-
-        Customer customer = new CustomerImpl();
-
-        CustomerOrder order = new CustomerOrder(productsOrdered, new BigDecimal(10.00), customer);
-        CustomerOrder order2 = new CustomerOrder(productsOrdered2, new BigDecimal(50.00), customer);
-
-        List<CustomerOrder> orders = new ArrayList<CustomerOrder>();
-        orders.add(order);
-        orders.add(order2);
-
-        order.setProductDispatched(product1, 5);
-
-        //return WarehouseBrain.getWarehouseBrain().getAndRemoveCustomerOrders(6);
-        //int i = 0;
-        String orderNum;
-        Map<Product, Integer> products;
-        String customerName;
-        String customerAddress;
-        String jsonProducts;
-        //ObjectMapper mapper = new ObjectMapper();
-
-
-//        JSONObject SendObject = new JSONObject();
-//        JSONObject feedObject = new JSONObject();
-//        JSONArray sendArray = new JSONArray();
-//        for(CustomerOrder co: orders) {
-//            //i++;
-//            orderNum = String.valueOf(co.getOrderNumber());
-//            products = co.getProductsOrdered();
-//            customerName = co.getCustomer().getTitleAndFullName();
-//            customerAddress = co.getCustomer().getAddress();
-//            try {
-//                jsonProducts = new ObjectMapper().writeValueAsString(products);
-//
-//                feedObject.put("OrderNumber", orderNum);
-//                feedObject.put("Products", products);
-//                feedObject.put("CustomerName", customerName);
-//                feedObject.put("CustomerAddress", customerAddress);
-//                SendObject.put("Products", feedObject);
-//                sendArray.put(i, SendObject);
-//
-//            //} catch (JsonProcessingException e) {
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-//        Map<String, String> jsonToReturn = new HashMap<String, String>();
-//        for(CustomerOrder co: orders) {
-//            //i++;
-//            orderNum = String.valueOf(co.getOrderNumber());
-//            products = co.getProductsOrdered();
-//            customerName = co.getCustomer().getTitleAndFullName();
-//            customerAddress = co.getCustomer().getAddress();
-//            try {
-//                //jsonProducts = mapper.writeValueAsString(products);
-//                jsonToReturn.put("OrderNumber", orderNum);
-//                //jsonToReturn.put("Products", jsonProducts);
-//                jsonToReturn.put("CustomerName", customerName);
-//                jsonToReturn.put("CustomerAddress", customerAddress);
-//                //} catch (JsonProcessingException e) {
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-        //JSONObject obj = new JSONObject(jsonToReturn);
-        //String jsonObject = JSONObject.valueToString(jsonToReturn);
-        //return jsonObject;
-        return order;
+    CustomerOrder getOrderToPick() {
+        return WarehouseBrain.getWarehouseBrain().getNextCustomerOrder();
     }
 
     //get a customer order by the orderNumber
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     Order getOrderByOrderNumber(@RequestBody long orderNumber) {
-        Order order = customerOrderService.findByOrderNumber(orderNumber);
+        Order order = fakeDatabase.findCustomerOrderByOrderNumber(orderNumber);
         return order;
     }
 
 
-    @RequestMapping(value = "/place", method = RequestMethod.POST)
-    public void Submit(@RequestParam("products") String products,@RequestParam("numbers") String numbers,@RequestParam("cost") String cost, @RequestParam("customer") String customer) {
-        // your logic here
-    }
-
-    /*
     //place a customer order
     @RequestMapping(value = "/place", method = RequestMethod.POST, consumes = "application/json")
     //public @ResponseBody void placeOrder(@RequestBody String[] order) {
@@ -168,25 +75,49 @@ public class CustomerOrderController {
     */
 
     //dispatch a customer order
-    @RequestMapping(value = "/dispatched", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
+    @RequestMapping(value = "/dispatched/errors", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<String> orderDispatched(@RequestBody String[] orderNumArray) {
-
-
-        String[] value = orderNumArray;
+    ResponseEntity<String> orderNotFullyDispatched(@RequestBody String[] orderNumArray) {
 
         try{
-            //handle
+            long orderNumber = Long.parseLong(orderNumArray[0]);
+            //get order from DB
+            Order order = null;
+            setProductsAsDispatched(orderNumArray, order);
             //Daves class to send text
-            //return ok
-
-
             return new ResponseEntity<String>(HttpStatus.OK);
         }catch(Exception ex){
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
-
-
     }
 
+    public void setProductsAsDispatched(String[] orderNumArray, Order order){
+        Product product = null;
+        for(int i = 1; i < orderNumArray.length - 1; i+=2){
+            int productID = Integer.parseInt(orderNumArray[i]);
+            int quantity = Integer.parseInt(orderNumArray[i+1]);
+            //get product from DB
+            //Product product = db.getProduct(productID);
+            //order.setProductDispatched();
+        }
+    }
+
+    //dispatch a customer order
+    @RequestMapping(value = "/dispatched", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
+    public @ResponseBody
+    ResponseEntity<String> orderDispatched(@RequestBody String orderNum) {
+        try{
+            long orderNumber = Long.parseLong(orderNum);
+            //*********get order from DB by orderNum*************************
+            Order order = customerOrderService.findByOrderNumber(orderNumber);
+            Map<Product, Integer> productsOrdered = order.getProductsOrdered();
+            for (Map.Entry<Product, Integer> productOrdered : productsOrdered.entrySet()) {
+                order.setProductDispatched(productOrdered.getKey(), productOrdered.getValue());
+            }
+            //Daves class to send text
+            return new ResponseEntity<String>(HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
