@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,9 +41,10 @@ public class CustomerOrderController {
     }
 
     public List<Integer> splitStringAndReturnIntList(String string){
-        List<Integer> listToReturn = Arrays.asList();
+        List<Integer> listToReturn = new ArrayList<Integer>();
         List<String> stringList = Arrays.asList(string.split(","));
         for(String s : stringList) listToReturn.add(Integer.valueOf(s));
+
         return listToReturn;
     }
 
