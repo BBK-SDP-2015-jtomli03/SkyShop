@@ -8,25 +8,30 @@ import java.util.List;
  */
 public interface Product {
 
+    // price
     BigDecimal getPrice();
-
     void setPrice(BigDecimal price);
 
+    // name
     String getName();
-
     void setName(String name);
 
-    String getDescription();
+    //shortDescription
+    String getShortDescription();
+    void setShortDescription(String description);
 
-    void setDescription(String description);
+    // longDescription
+    String getLongDescription();
+    void setLongDescription(String longDescription);
 
+    // productSupplier
     void addProductSupplier(Supplier supplier);
-
     List<Supplier> getProductSuppliers();
 
+    // productCode
     String getProductCode();
-
     void setProductCode(String productCode);
+
 
     void setSuppliers(List<Supplier> suppliers);
 

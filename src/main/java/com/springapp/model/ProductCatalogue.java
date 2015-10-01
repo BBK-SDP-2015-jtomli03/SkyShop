@@ -31,4 +31,17 @@ public class ProductCatalogue implements Catalogue{
         products.remove(product);
     }
 
+    public void addListOfProducts(List<Product> productList){
+        for (int i = 0; i < productList.size(); i++){
+            products.add(productList.get(i));
+        }
+//        for(Product product: productList){
+//            products.add(product);
+//        }
+    }
+
+    public void removeAllProducts(){
+        products.clear();
+    }
+
 }

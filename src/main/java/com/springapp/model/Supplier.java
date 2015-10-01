@@ -6,5 +6,6 @@ package com.springapp.model;
 public interface Supplier {
         //contact details
 
-        String getAddress();
+        Address getAddress();
+    public abstract int getSupplierId();
     }

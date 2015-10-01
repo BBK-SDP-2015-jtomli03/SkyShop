@@ -1,43 +1,72 @@
 package com.springapp.model;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "products")
 public class ProductImpl implements Product {
-	@Id
-	@Column(name = "id")
+
 	private int id;
-	@Column(name = "code")
+
 	private String productCode;
-	@Column(name= "tid")
-	private int productTypeId;
-	@Column(name= "name")
 	private String name;
-	private String description;
+	private String shortDescription;
+	private String longDescription;
 	private BigDecimal price;
 	private String imageUrl;
-	private int stockLevel = -100;
 	private int reorderLevel;
 	private List<Supplier> suppliers = new ArrayList<Supplier>();
-	private boolean discontinued = false;
 	private String shelfLocation = null;
 	private String rowLocation = null;
+	private int stockLevel = -100;
+	private boolean discontinued = false;
 
-	public ProductImpl(int id, int tid, String productCode, String name, String description, BigDecimal price, String imageUrl){
+	public ProductImpl(int id, String productCode, String name, String shortDescription, String longDescription, BigDecimal price, String imageUrl, int reorderLevel, List<Supplier> suppliers, String shelfLocation, String rowLocation, int stockLevel, boolean discontinued) {
 		this.id = id;
-		this.productTypeId = tid;
 		this.productCode = productCode;
 		this.name = name;
-		this.description = description;
+		this.shortDescription = shortDescription;
+		this.longDescription = longDescription;
 		this.price = price;
 		this.imageUrl = imageUrl;
+		this.reorderLevel = reorderLevel;
+		this.suppliers = suppliers;
+		this.shelfLocation = shelfLocation;
+		this.rowLocation = rowLocation;
+		this.stockLevel = stockLevel;
+		this.discontinued = discontinued;
+	}
+
+	public ProductImpl(String productCode, String name, String shortDescription, String longDescription, BigDecimal price, String imageUrl, String rowLocation, String shelfLocation, int reOrderLevel, int stockLevel, boolean discontinued) {
+		this.productCode = productCode;
+		this.name = name;
+		this.shortDescription = shortDescription;
+		this.longDescription = longDescription;
+		this.price = price;
+		this.imageUrl = imageUrl;
+		this.rowLocation = rowLocation;
+		this.shelfLocation = shelfLocation;
+		this.reorderLevel = reorderLevel;
+		this.stockLevel = stockLevel;
+		this.discontinued = discontinued;
+	}
+
+	@Override
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	@Override
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	@Override
+	public String getLongDescription() {
+		return longDescription;
+	}
+
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
 	}
 
 	@Override
@@ -58,16 +87,6 @@ public class ProductImpl implements Product {
 	@Override
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@Override
-	public String getDescription() {
-		return description;
-	}
-
-	@Override
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	@Override
@@ -111,21 +130,12 @@ public class ProductImpl implements Product {
 		this.imageUrl = imageUrl;
 	}
 
-	@Override
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getTid() {
-		return productTypeId;
-	}
-
-	public void setTid(int tid) {
-		this.productTypeId = tid;
 	}
 
 	public List<Supplier> getSuppliers() {
@@ -165,13 +175,6 @@ public class ProductImpl implements Product {
 		this.reorderLevel = reorderLevel;
 	}
 
-	public int getProductTypeId() {
-		return productTypeId;
-	}
-
-	public void setProductTypeId(int productTypeId) {
-		this.productTypeId = productTypeId;
-	}
 
 	public String getShelfLocation() {
 		return shelfLocation;
