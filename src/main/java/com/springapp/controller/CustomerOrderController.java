@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -130,42 +127,13 @@ public class CustomerOrderController {
 
     @RequestMapping(value = "/place", method = RequestMethod.POST)
     public void Submit(@RequestParam("products") String products,@RequestParam("numbers") String numbers,@RequestParam("cost") String cost, @RequestParam("customer") String customer) {
-        // your logic here
+        List<String> productList = Arrays.asList(products.split(","));
+        List<String> numberListString = Arrays.asList(products.split(","));
+        int totalPrice = Integer.parseInt(cost);
+        List<Integer> numberOfProduct = new ArrayList<Integer>();
+        for(String s : numberListString) numberOfProduct.add(Integer.valueOf(s));
+
     }
-
-    /*
-    //place a customer order
-    @RequestMapping(value = "/place", method = RequestMethod.POST, consumes = "application/json")
-    //public @ResponseBody void placeOrder(@RequestBody String[] order) {
-    public String placeOrder(@RequestParam(value="myArray") String[] parameters){
-        //WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
-        //customerOrderService.persist(order);
-        //return oks
-        return "";
-    }
-    */
-
-    /*
-    @RequestMapping("/place")
-    public class placeOrder {
-        @RequestMapping(method = RequestMethod.POST)
-        public @ResponseBody
-        Cart add(HttpServletRequest request, HttpServletResponse response)
-                throws Exception {
-
-            Cart cart = new Cart();
-
-            String[] products = request.getParameter("products");
-            String[] numbers = request.getParameter("numberOfProducts");
-            String totalPrice = request.getParameter("totPrice");
-
-            cart.setProducts(products);
-            cart.setCustomer("guest");
-            cart.setQuantities(numbers);
-            cart.setTotalPrice(totalPrice);
-        }
-    }
-    */
 
     //dispatch a customer order
     @RequestMapping(value = "/dispatched", method = RequestMethod.POST, consumes="application/json", produces = "application/json")

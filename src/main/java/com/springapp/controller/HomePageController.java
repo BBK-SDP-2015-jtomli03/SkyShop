@@ -1,6 +1,5 @@
 package com.springapp.controller;
 
-import com.springapp.model.Cart;
 import com.springapp.model.CustomerOrder;
 import com.springapp.model.Order;
 import org.springframework.stereotype.Controller;
@@ -47,12 +46,5 @@ public class HomePageController {
 	public String printBasket(Model model) {
 		model.addAttribute("order", new CustomerOrder());
 		return "basket";
-	}
-
-	@RequestMapping(value = "/get/cart", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody
-	Cart getOrderByOrderNumber() {
-		Cart cart = new Cart();
-		return cart;
 	}
 }
