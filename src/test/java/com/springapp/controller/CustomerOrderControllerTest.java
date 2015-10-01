@@ -46,18 +46,5 @@ public class CustomerOrderControllerTest {
         assertThat(actual, is(expected));
     }
 
-    @Test
-    public void addProductsAndQuantitiesToMap(){
-        List<Integer> numberOfProductToOrder = new ArrayList<Integer>();
-        numberOfProductToOrder.add(1);
-        numberOfProductToOrder.add(2);
-        numberOfProductToOrder.add(3);
-        Map<Product, Integer> expected = new HashMap<Product, Integer>();
-        expected.put(db.getProduct(1),1);
-        expected.put(db.getProduct(2),2);
-        expected.put(db.getProduct(3),3);
-        Map<Product, Integer> actual = controller.addProductsAndQuantitiesToMap(list, numberOfProductToOrder);
-        assertThat(actual, is(expected));
-    }
 
 }

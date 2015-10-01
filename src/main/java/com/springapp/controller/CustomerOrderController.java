@@ -40,11 +40,15 @@ public class CustomerOrderController {
         List<Integer> productIDs = splitStringAndReturnIntList(products);
         List<Integer> numberOfProductToOrder = splitStringAndReturnIntList(numbers);
         Map<Product, Integer> productsToOrder = addProductsAndQuantitiesToMap(productIDs, numberOfProductToOrder);
-        BigDecimal totalCost = new BigDecimal(Integer.parseInt(cost));
-        Customer customer = fakeDatabase.getCustomer(Integer.parseInt(customerId));
+        BigDecimal totalCost = new BigDecimal(cost);
+
+        Customer customer = fakeDatabase.getCustomer(1);
+
         Order order = new CustomerOrder(productsToOrder, totalCost, customer);
         fakeDatabase.addCustomerOrder(order);
         WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
+        
+        //System.out.print(WarehouseBrain.getWarehouseBrain().getCustomerOrder(2).getTotalPrice());
     }
 
     public Map<Product, Integer> addProductsAndQuantitiesToMap(List<Integer> productIDs, List<Integer> numberOfProductToOrder){
