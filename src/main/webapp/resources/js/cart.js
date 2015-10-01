@@ -158,13 +158,11 @@ function checkout() {
 }
 
 function processCheckout(){
-    //var sendString = [];
     var allProducts = [];
     var numProducts = [];
     var sumPrice = 0;
     var cart = JSON.parse(sessionStorage.getItem("cart"));
     var items = cart.items;
-    //sendString.push("guest");
     for( var i = 0; i < items.length; ++i ) {
         var item = items[i];
         var id = item.id;
@@ -172,71 +170,51 @@ function processCheckout(){
         var price = item.price;
         allProducts.push(id);
         numProducts.push(num);
-        //sendString.push(id.toString());
-        //sendString.push(num.toString());
         sumPrice += num*price;
     }
-    //sendString.push(sumPrice.toFixed(2).toString());
     sumPrice = sumPrice.toFixed(2);
-
-    //console.log(sendString.toString());
-    //jQuery.post( "/customer/order/place", "1,2,3", function()  {
-    //    alert( "test" );
-    //});
-    //console.log(JSON.stringify(cart));
-    /*
-    jQuery.ajax({
-        type: "POST",
-        data: {sendString:sendString},
-        url: "/customer/order/place",
-        success:function(data) {
-            console.log(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown){
-            alert(textStatus);
-        }
-    });
-    */
-    /*
-    $.ajax({
-        type: "POST",
-        url: "/customer/order/place",
-        data: { name: "John", location: "Boston" },
-        success: function (html) {
-            alert("works");
-        },
-        error: function(e) {
-            console.log("Error:" + e);
-        }
-    });
-    */
-
-    //console.log(allProducts.toString());
 
     $.ajax({
         type: "POST",
         url: "/customer/order/place",
         data: { products: allProducts.toString(), numbers: numProducts.toString(), cost: sumPrice, customer: "guest"},
         success: function (html) {
+            sendMail("Thank you for your order at Sky Accessories of products with the value of &pound;" + sumPrice + ". We'll get in contact again when your purchase has been dispatched.\n\n Best Regards,\n\n The Sky Accessories Team");
+            emptyCart();
             window.location.href = "/confirmation";
-            //alert("works");
+
+            0//alert("works");
         },
         error: function(e) {
             alert("Failed to contact the database! Please get in touch.");
         }
     });
 
-    /*
+}
+function sendMail(message) {
     $.ajax({
-        url: "/customer/order/place",
-        dataType: "json",
-        headers : {
-            'Accept' : 'application/json',
-            'Content-Type' : 'application/json'
+        type: 'POST',
+        url: 'https://mandrillapp.com/api/1.0/messages/send.json',
+        error: function(e) {
+            alert("Failed to send email confirmation");
         },
-        data: JSON.stringify(["test","test"]),
-        type: "POST",
-        contentType : 'application/json; charset=utf-8',
+        data: {
+            'key': 'csBttf6DdMb7q1VbG_EgzQ',
+            'message': {
+                'from_email': 'sky-accessories@sky.com',
+                'to': [
+                    {
+                        'email': 'jake.tyrie@hotmail.co.uk',
+                        'name': 'Jacob Tyrie',
+                        'type': 'to'
+                    }
+                ],
+                'autotext': 'true',
+                'subject': 'Order confirmation from Sky Accessories',
+                'html': message
+            }
+        }
+    }).done(function(response) {
+        console.log(response); // if you're into that sorta thing
     });
-*/
 }
