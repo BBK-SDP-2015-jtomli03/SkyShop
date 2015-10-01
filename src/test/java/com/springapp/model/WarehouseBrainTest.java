@@ -40,8 +40,8 @@ public class WarehouseBrainTest {
 
     @Test
     public void testgetNextCustomerOrderIfNoCustomerOrders() {
-        CustomerOrder expected = null;
-        CustomerOrder result = WarehouseBrain.getWarehouseBrain().getNextCustomerOrder();
+        Order expected = null;
+        Order result = WarehouseBrain.getWarehouseBrain().getNextCustomerOrder();
         assertEquals(expected, result);
     }
 

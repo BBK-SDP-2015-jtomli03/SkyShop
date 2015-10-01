@@ -37,4 +37,6 @@ public interface Product {
     int adjustStockLevel(int numOfItemsBought);
 
     int getReorderLevel();
+
+    int getId();
 }

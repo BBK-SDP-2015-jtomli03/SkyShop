@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "customers")
 public class CustomerImpl implements Customer{
+    private int id;
     private String title;
     private String firstName;
     private String lastName;
@@ -55,6 +56,11 @@ public class CustomerImpl implements Customer{
     @Override
     public String getAddress(){
         return address1 + " " + address2 + " " + town + " " + county + " " + postcode;
+    }
+
+    @Override
+    public int getId(){
+        return id;
     }
 }
 

@@ -75,4 +75,9 @@ public class ProductOrder implements Order {
     public Map<Product, Map<DateTime, Integer>> getDeliveredProducts() {
         return null;
     }
+
+    @Override
+    public long getOrderNumber() {
+        return orderNumber;
+    }
 }

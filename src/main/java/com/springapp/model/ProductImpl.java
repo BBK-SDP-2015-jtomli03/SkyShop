@@ -111,6 +111,7 @@ public class ProductImpl implements Product {
 		this.imageUrl = imageUrl;
 	}
 
+	@Override
 	public int getId() {
 		return id;
 	}

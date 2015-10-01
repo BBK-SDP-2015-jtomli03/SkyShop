@@ -18,4 +18,6 @@ public interface Customer {
     String getAddress();
 
     String getTitleAndFullName();
+
+    int getId();
 }

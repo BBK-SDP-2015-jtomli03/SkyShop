@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class WarehouseBrain {
     private static WarehouseBrain warehouseBrain = new WarehouseBrain();
-    List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
-    List<CustomerOrder> customerOrders = new ArrayList<CustomerOrder>();
+    List<Order> productOrders = new ArrayList<Order>();
+    List<Order> customerOrders = new ArrayList<Order>();
 
     private WarehouseBrain(){
 
@@ -19,16 +19,16 @@ public class WarehouseBrain {
         return warehouseBrain;
     }
 
-    public List<ProductOrder> getProductOrders() {
+    public List<Order> getProductOrders() {
         return productOrders;
     }
 
-    public List<CustomerOrder> getCustomerOrders() {
+    public List<Order> getCustomerOrders() {
         return customerOrders;
     }
 
-    public CustomerOrder getNextCustomerOrder(){
-        CustomerOrder order = null;
+    public Order getNextCustomerOrder(){
+        Order order = null;
         if(customerOrders != null && !customerOrders.isEmpty()){
             order = customerOrders.get(0);
             customerOrders.remove(0);
@@ -37,12 +37,12 @@ public class WarehouseBrain {
     }
 
     //adds a product order to the list
-    public void addProductOrder(ProductOrder productOrder){
+    public void addProductOrder(Order productOrder){
         productOrders.add(productOrder);
     }
 
     //adds a customer order to the list
-    public void addCustomerOrder(CustomerOrder customerOrder){
+    public void addCustomerOrder(Order customerOrder){
         customerOrders.add(customerOrder);
     }
 }

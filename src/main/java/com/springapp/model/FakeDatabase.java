@@ -12,14 +12,12 @@ import java.util.Map;
 public class FakeDatabase {
     private List<Product> products = new ArrayList<Product>();
     private List<Customer> customers = new ArrayList<Customer>();
-    private List<CustomerOrder> customerOrders = new ArrayList<CustomerOrder>();
-
-
+    private List<Order> customerOrders = new ArrayList<Order>();
 
     public FakeDatabase(){
         Product product1 = new ProductImpl(1, 2, "productCode", "String name", "String description", new BigDecimal(2.00), "String imageUrl");
-        Product product2 = new ProductImpl(2, 2, "productCode", "Gnome", "String description", new BigDecimal(2.00), "String imageUrl");
-        Product product3 = new ProductImpl(3, 2, "productCode", "Remote", "String description", new BigDecimal(2.00), "String imageUrl");
+        Product product2 = new ProductImpl(1, 2, "productCode", "Gnome", "String description", new BigDecimal(2.00), "String imageUrl");
+        Product product3 = new ProductImpl(1, 2, "productCode", "Remote", "String description", new BigDecimal(2.00), "String imageUrl");
         products.add(product1);
         products.add(product2);
         products.add(product3);
@@ -32,20 +30,24 @@ public class FakeDatabase {
         customers.add(customer3);
 
         Map<Product, Integer> productsOrdered = new HashMap<Product, Integer>();
-        productsOrdered.put(product1, 10);
-        productsOrdered.put(product2, 20);
-        productsOrdered.put(product3, 30);
+        productsOrdered.put(product1, 1);
+        productsOrdered.put(product2, 2);
+        productsOrdered.put(product3, 3);
 
         Map<Product, Integer> productsOrdered2 = new HashMap<Product, Integer>();
-        productsOrdered.put(product1, 100);
-        productsOrdered.put(product2, 200);
-        productsOrdered.put(product3, 300);
+        productsOrdered.put(product1, 1);
+        productsOrdered.put(product2, 2);
+        productsOrdered.put(product3, 3);
 
         CustomerOrder order = new CustomerOrder(productsOrdered, new BigDecimal(10.00), customer1);
         CustomerOrder order2 = new CustomerOrder(productsOrdered2, new BigDecimal(50.00), customer2);
 
         customerOrders.add(order);
         customerOrders.add(order2);
+
+        WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
+        WarehouseBrain.getWarehouseBrain().addCustomerOrder(order2);
+
     }
 
     // ADD A PRODUCT
@@ -55,12 +57,42 @@ public class FakeDatabase {
 
     // FIND CUSTOMER ORDER BY ORDER NUMBER
     public Order findCustomerOrderByOrderNumber(long orderNumber){
-        for(CustomerOrder order : customerOrders){
+        for(Order order : customerOrders){
             if(order.getOrderNumber() == orderNumber){
                 return order;
             }
         }
         return null;
+    }
+
+    public Product getProduct(int productId){
+        for(Product product : products){
+            if(product.getId() == productId){
+                return product;
+            }
+        }
+        return null;
+    }
+
+    public void persist(Product product){
+        products.add(product);
+    }
+
+    public void update(Product product){
+        //to implement
+    }
+
+    public Customer getCustomer(int id){
+        for(Customer customer : customers){
+            if(customer.getId() == id){
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    public void addCustomerOrder(Order order){
+        customerOrders.add(order);
     }
 
 }

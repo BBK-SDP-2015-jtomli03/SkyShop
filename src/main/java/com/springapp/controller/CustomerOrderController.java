@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 
 /**
@@ -17,13 +17,15 @@ import java.util.List;
 public class CustomerOrderController {
     FakeDatabase fakeDatabase = new FakeDatabase();
 
-    //get six orders at a time for warehouse app
+    //DONE
+    //get one order for warehouse app
     @RequestMapping(value = "/pick", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    CustomerOrder getOrderToPick() {
+    Order getOrderToPick() {
         return WarehouseBrain.getWarehouseBrain().getNextCustomerOrder();
     }
 
+    //DONE
     //get a customer order by the orderNumber
     @RequestMapping(value = "/get", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
@@ -32,25 +34,44 @@ public class CustomerOrderController {
         return order;
     }
 
-
+    //JAKES JSON STRING -> NOT WORKING BUT COMPLETE
     @RequestMapping(value = "/place", method = RequestMethod.POST)
-    public void Submit(@RequestParam("products") String products,@RequestParam("numbers") String numbers,@RequestParam("cost") String cost, @RequestParam("customer") String customer) {
-        List<Integer> numberOfProduct = splitStringAndReturnIntList(products);
+    public void Submit(@RequestParam("products") String products,@RequestParam("numbers") String numbers,@RequestParam("cost") String cost, @RequestParam("customer") String customerId) {
+        List<Integer> productIDs = splitStringAndReturnIntList(products);
+        List<Integer> numberOfProductToOrder = splitStringAndReturnIntList(numbers);
+        Map<Product, Integer> productsToOrder = addProductsAndQuantitiesToMap(productIDs, numberOfProductToOrder);
+        BigDecimal totalCost = new BigDecimal(Integer.parseInt(cost));
+        Customer customer = fakeDatabase.getCustomer(Integer.parseInt(customerId));
+        Order order = new CustomerOrder(productsToOrder, totalCost, customer);
+        fakeDatabase.addCustomerOrder(order);
+        WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
+    }
 
+    public Map<Product, Integer> addProductsAndQuantitiesToMap(List<Integer> productIDs, List<Integer> numberOfProductToOrder){
+        Map<Product, Integer> productIntegerMap = new HashMap<Product, Integer>();
+        Product product;
+        int productId;
+        int quantity;
+        for(int i = 0; i < productIDs.size(); i++){
+            productId = productIDs.get(i);
+            product = fakeDatabase.getProduct(productId);
+            quantity = numberOfProductToOrder.get(i);
+            productIntegerMap.put(product, quantity);
+        }
+        return productIntegerMap;
     }
 
     public List<Integer> splitStringAndReturnIntList(String string){
-        List<Integer> listToReturn = Arrays.asList();
+        List<Integer> listToReturn = new ArrayList<Integer>();
         List<String> stringList = Arrays.asList(string.split(","));
-        for(String s : stringList) listToReturn.add(Integer.valueOf(s));
+        for (String s : stringList) listToReturn.add(Integer.valueOf(s));
         return listToReturn;
     }
 
     //dispatch a customer order
-    @RequestMapping(value = "/dispatched", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
+    @RequestMapping(value = "/dispatched/errors", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
     public @ResponseBody
     ResponseEntity<String> orderDispatched(@RequestBody String[] orderNumArray) {
-
         try{
             long orderNumber = Long.parseLong(orderNumArray[0]);
             //get order from DB
@@ -74,22 +95,22 @@ public class CustomerOrderController {
         }
     }
 
-//    //dispatch a customer order
-//    @RequestMapping(value = "/dispatched", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
-//    public @ResponseBody
-//    ResponseEntity<String> orderDispatched(@RequestBody String orderNum) {
-//        try{
-//            long orderNumber = Long.parseLong(orderNum);
-//            //*********get order from DB by orderNum*************************
-//            Order order = customerOrderService.findByOrderNumber(orderNumber);
-//            Map<Product, Integer> productsOrdered = order.getProductsOrdered();
-//            for (Map.Entry<Product, Integer> productOrdered : productsOrdered.entrySet()) {
-//                order.setProductDispatched(productOrdered.getKey(), productOrdered.getValue());
-//            }
-//            //Daves class to send text
-//            return new ResponseEntity<String>(HttpStatus.OK);
-//        }catch(Exception ex){
-//            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-//        }
-//    }
+    //COMPLETE
+    //dispatch a customer order
+    @RequestMapping(value = "/dispatched", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
+    public @ResponseBody
+    String orderDispatchedAllOK(@RequestBody String[] orderNum) {
+        try{
+            long orderNumber = Long.parseLong(orderNum[0]);
+            Order order = fakeDatabase.findCustomerOrderByOrderNumber(orderNumber);
+            Map<Product, Integer> productsOrdered = order.getProductsOrdered();
+            for (Map.Entry<Product, Integer> productOrdered : productsOrdered.entrySet()) {
+                order.setProductDispatched(productOrdered.getKey(), productOrdered.getValue());
+            }
+            //Daves class to send text
+            return "OK";
+        }catch(Exception ex){
+            return "ERROR";
+        }
+    }
 }

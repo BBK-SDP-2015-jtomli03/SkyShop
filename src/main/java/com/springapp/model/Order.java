@@ -35,5 +35,5 @@ public interface Order {
     //check products already delivered from this order, the date they were delivered and the quantity delivered
     Map<Product, Map<DateTime, Integer>> getDeliveredProducts();
 
-
+    long getOrderNumber();
 }
