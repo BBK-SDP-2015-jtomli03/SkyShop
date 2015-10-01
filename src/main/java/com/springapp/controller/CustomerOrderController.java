@@ -1,18 +1,12 @@
 package com.springapp.controller;
 
 import com.springapp.model.*;
-import com.springapp.service.CustomerOrderService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -41,23 +35,20 @@ public class CustomerOrderController {
     }
 
 
-//    //place a customer order
-//    @RequestMapping(value = "/place", method = RequestMethod.POST, consumes = "application/json")
-//    //public @ResponseBody void placeOrder(@RequestBody String[] order) {
-//    public String placeOrder(@RequestParam(value="myArray") String[] parameters){
-//        //WarehouseBrain.getWarehouseBrain().addCustomerOrder(order);
-//        //customerOrderService.persist(order);
-//        //return oks
-//        return "";
-//    }
-    
+    @RequestMapping(value = "/place", method = RequestMethod.POST)
+    public void Submit(@RequestParam("products") String products,@RequestParam("numbers") String numbers,@RequestParam("cost") String cost, @RequestParam("customer") String customer) {
+        List<String> productList = Arrays.asList(products.split(","));
+        List<String> numberListString = Arrays.asList(products.split(","));
+        int totalPrice = Integer.parseInt(cost);
+        List<Integer> numberOfProduct = new ArrayList<Integer>();
+        for(String s : numberListString) numberOfProduct.add(Integer.valueOf(s));
 
-
+    }
 
     //dispatch a customer order
-    @RequestMapping(value = "/dispatched/errors", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
+    @RequestMapping(value = "/dispatched", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
     public @ResponseBody
-    ResponseEntity<String> orderNotFullyDispatched(@RequestBody String[] orderNumArray) {
+    ResponseEntity<String> orderDispatched(@RequestBody String[] orderNumArray) {
 
         try{
             long orderNumber = Long.parseLong(orderNumArray[0]);

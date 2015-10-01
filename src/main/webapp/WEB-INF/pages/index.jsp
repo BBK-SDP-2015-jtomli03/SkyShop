@@ -24,27 +24,24 @@
 			<div class="col s12 m12 l4">
 				<div class="icon-block">
 					<h2 class="center light-blue-text"><i class="large material-icons">thumb_up</i></h2>
-					<h5 class="center">Speeds up development</h5>
-
-					<p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<h5 class="center">Industry Expertise</h5>
+					<p class="light">We have more than 30 years of experience in audio visual products, so when buy from us you know you're buying from the best.</p>
 				</div>
 			</div>
 
 			<div class="col s12 m6 l4">
 				<div class="icon-block">
-					<h2 class="center light-blue-text"><i class="large material-icons">shopping_cart</i></h2>
-					<h5 class="center">User Experience Focused</h5>
-
-					<p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<h2 class="center light-blue-text"><i class="large material-icons">star</i></h2>
+					<h5 class="center">Customer Satisfaction</h5>
+					<p class="light">We have award winning customer service because we aim to always offer our customers the quality they deserve.</p>
 				</div>
 			</div>
 
 			<div class="col s12 m6 l4">
 				<div class="icon-block">
-					<h2 class="center light-blue-text"><i class="large material-icons">phone</i></h2>
-					<h5 class="center">Easy to work with</h5>
-
-					<p class="light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<h2 class="center light-blue-text"><i class="large material-icons">live_tv</i></h2>
+					<h5 class="center">Quality Products</h5>
+					<p class="light">We only stock the best quality products from suppliers we trust, so you can be sure that quality is ensured in evey purchase.</p>
 				</div>
 			</div>
 		</div>

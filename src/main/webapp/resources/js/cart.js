@@ -211,6 +211,8 @@ function processCheckout(){
     });
     */
 
+    //console.log(allProducts.toString());
+
     $.ajax({
         type: "POST",
         url: "/customer/order/place",
