@@ -1,84 +1,109 @@
 package com.springapp.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class EmployeeImpl {
 
-@Entity
-@Table(name = "Employee")
-public class EmployeeImpl implements Employee{
+	private int employeeId;
+	private String title, forename, surname;
+	private Address address;
+	private Department department; //is this correct?
+	private String mobileNumber, landlineNumber;
+	private String login;
+	private String password;
+	private int securityLevel;
 
-	@Id
-	@Column(name = "id")
-	private String id;
-	
-	@Column(name = "title")
-	private String title;
-
-	@Column(name = "Forename")
-	private String forename;
-	
-	@Column(name = "Surname")
-	private String surname;
-	
-	public EmployeeImpl() {
+	public EmployeeImpl(int employeeId, String title, String forename, String surname, Address address, Department department, String mobileNumber, String landlineNumber, String login, String password, int securityLevel){
+		this.employeeId = employeeId;
+		this.title = title;
+		this.forename = forename;
+		this.surname = surname;
+		this.address = address;
+		this.department = department;
+		this.mobileNumber = mobileNumber;
+		this.landlineNumber = landlineNumber;
+		this.login = login;
+		this.password = password;
+		this.securityLevel = securityLevel;
 	}
 
-	public EmployeeImpl(String id, String title, String forename, String surname) {
-		this.id = id;
+	public EmployeeImpl(String title, String forename, String surname, Address address, Department department, String mobileNumber, String landlineNumber, String login, String password, int securityLevel){
+		this.title = title;
+		this.forename = forename;
+		this.surname = surname;
+		this.address = address;
+		this.department = department;
+		this.mobileNumber = mobileNumber;
+		this.landlineNumber = landlineNumber;
+		this.login = login;
+		this.password = password;
+		this.securityLevel = securityLevel;
+	}
+
+	//EmployeeId
+	public int getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	//gName
+	public String getName() { return title + " " + forename + " " + surname;}
+	public void setName(String title, String forename, String surname) {
 		this.title = title;
 		this.forename = forename;
 		this.surname = surname;
 	}
-	
-	public EmployeeImpl(String title, String forename, String surname) {
-		this.title = title;
-		this.forename = forename;
-		this.surname = surname;
+
+	//Address
+	public Address getAddress() {
+		return address;
 	}
-	
-	public String getId() {
-		return id;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	//Department
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
-	public String getTitle() {
-		return title;
+	//MobileNumber
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	//LandlineNumber
+	public String getLandlineNumber() {
+		return landlineNumber;
 	}
-	
-	public String getForename() {
-		return forename;
-	}
-	
-	public void setForename(String forename) {
-		this.forename = forename;
+	public void setLandlineNumber(String landlineNumber) {
+		this.landlineNumber = landlineNumber;
 	}
 
-	public String getSurname() {
-		return surname;
+	//Login
+	public String getLogin() {
+		return login;
 	}
-	
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee: " + this.id 
-							+ ": " 
-							+ this.title 
-							+ " "  
-							+ this.forename 
-							+ " " 
-							+ this.surname;
+	//Password
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	
+
+	//SecurityLevel
+	public int getSecurityLevel() {
+		return securityLevel;
+	}
+	public void setSecurityLevel(int securityLevel) {
+		this.securityLevel = securityLevel;
+	}
 }

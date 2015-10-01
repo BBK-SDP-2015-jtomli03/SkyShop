@@ -24,7 +24,7 @@ public class CustomerController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addCustomer(@ModelAttribute("SpringWeb")CustomerImpl newUser,
                              ModelMap model) {
-        model.addAttribute("firstName", newUser.getFirstName());
+        model.addAttribute("firstName", newUser.getForename());
 
         return "test";
     }
